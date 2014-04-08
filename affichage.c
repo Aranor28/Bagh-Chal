@@ -31,25 +31,23 @@ void affichage_plateau(int nb_chevre_reserve){
   
   /*Affichage des différents pions*/
   for (i=0; i< HEIGT ;i++){
-     for (j=0 ; j < WIDTH ; j++){
-       
-	if ( plateau[i][j] == 0 ) // Si il n'y pas de pion
-	  mvprintw(i*2+1,j*3," ");
-	
-	else if ( plateau[i][j] == TIGRE ){ // Si il y a un tigre
-	  init_pair(2, COLOR_RED,COLOR_BLACK);
-	  attron(A_BOLD | COLOR_PAIR(2));
-	  mvprintw(i*2+1,j*3,"T");
-	  attroff(A_BOLD | COLOR_PAIR(2));
-	}
-	else { // Si il y a une chèvre
-	  init_pair(3, COLOR_GREEN,COLOR_BLACK);
-	  attron(A_BOLD | COLOR_PAIR(3));
-	  mvprintw(i*2+1,j*3,"C");
-	  attroff(A_BOLD | COLOR_PAIR(3));
-	}
-      }
+    for (j=0 ; j < WIDTH ; j++){
+    	if ( plateau[i][j] == 0 ) // Si il n'y pas de pion
+    	  mvprintw(i*2+1,j*3," ");
+    	
+    	else if ( plateau[i][j] == TIGRE ){ // Si il y a un tigre
+    	  init_pair(2, COLOR_RED,COLOR_BLACK);
+    	  attron(A_BOLD | COLOR_PAIR(2));
+    	  mvprintw(i*2+1,j*3,"T");
+    	  attroff(A_BOLD | COLOR_PAIR(2));
+    	}
+    	else { // Si il y a une chèvre
+    	  init_pair(3, COLOR_GREEN,COLOR_BLACK);
+    	  attron(A_BOLD | COLOR_PAIR(3));
+    	  mvprintw(i*2+1,j*3,"C");
+    	  attroff(A_BOLD | COLOR_PAIR(3));
+    	}
+    }
   }
-  getch();
 }
 
