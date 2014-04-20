@@ -1,6 +1,7 @@
 #include "affichage.c"
 #include "deplacement_tigre.c"
 #include "placement_chevre.c"
+#include "fin_partie.c"
 
 
 /**** FONCTION D'INITIALISATION DU PLATEAU ****/
@@ -22,7 +23,7 @@ void initialiser_plateau (){
 
 
 int main (){
-  int chevre_placee = 0, chevre_mangee = 0, x=0, y=0,x2,y2;
+  int chevre_placee = 0, chevre_mangee = 0;
   int joueur = JOUEUR_CHEVRE  ;
 
   /* Préparation de Ncurses */
@@ -45,10 +46,11 @@ int main (){
         affichage_info(chevre_placee, chevre_mangee,JOUEUR_TIGRE);
 
         refresh();
-        verification_deplacement_tigre();
+        verification_deplacement_tigre(&chevre_mangee);
         affichage_pion();
         affichage_info(chevre_placee, chevre_mangee,JOUEUR_CHEVRE);
         refresh();
+        detection_fin_partie(chevre_mangee,0);
         //getch();();
 
    }  
