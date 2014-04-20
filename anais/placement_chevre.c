@@ -3,11 +3,8 @@ int placement_chevre (int x, int y){
 	int retour=0;
 
 	/*Si l'intersection souhaitée n'est pas valide*/
-	if (x > 4 || y > 4 || plateau[x][y] != VIDE){
-		printf("Erreur case incorrecte ! Essayer à nouveau\n");
-		placement_chevre(x,y);
+	if (x > 4 || y > 4 || plateau[x][y] != VIDE)
 		retour=1;
-	}
 	else
 		plateau[x][y] = CHEVRE;
 
