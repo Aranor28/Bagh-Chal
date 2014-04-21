@@ -1,8 +1,14 @@
-#include "affichage.c"
-#include "deplacement_tigre.c"
-#include "placement_chevre.c"
-#include "fin_partie.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include <ncurses.h>
+#include "main.h"
 
+#include "affichage.h"
+#include "deplacement_tigre.h"
+#include "placement_chevre.h"
+#include "fin_partie.h"
+#include "entree_souris.h"
+#include "sauvegarde.h"
 
 /**** FONCTION D'INITIALISATION DU PLATEAU ****/
 /**** PLACE LES TIGRES DANS LES ANGLES DU PLATEAU ET MET A VIDE LES AUTRES CASES ****/

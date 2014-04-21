@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include "placement_chevre.h"
+#include "main.h"
 
 int placement_chevre (int x, int y){
 	int retour=0;

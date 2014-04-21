@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include "sauvegarde.h"
+#include "main.h"
 
 /* AFFICHE DANS LE FICHIER DE SAUVEGARDE :
  * LE PLATEAU LIGNE PAR LIGNE
@@ -5,9 +8,7 @@
  * LE NOMBRE DE CHEVRES MANGEES
  * LE TOUR DU JOUEUR SUIVANT
  */
-
-
-void sauvegarde (chevre_placee,chevre_mangee,joueur){
+void sauvegarde (int chevre_placee, int chevre_mangee, int joueur){
 	int i,j;
 
 	FILE * fich = fopen("sauvegarde.txt","w");

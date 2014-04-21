@@ -1,5 +1,7 @@
-
-
+#include <stdio.h>
+#include <stdlib.h>
+#include "deplacement_tigre.h"
+#include "main.h"
 
 int deplacement_tigre (int x1, int y1, int x2, int y2, int * nb_chevre_mangee){
 	int retour = 0;

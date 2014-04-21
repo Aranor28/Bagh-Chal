@@ -1,23 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ncurses.h>
-#define VIDE 0
-#define TIGRE 1
-#define CHEVRE 2
-
-#define JOUEUR_CHEVRE 0
-#define JOUEUR_TIGRE 1
-
-#define WIDTH 5    /* LARGEUR DU PLATEAU */
-#define HEIGHT 5    /* LONGUEUR DU PLATEAU */
-
-#define STARTX 10  /*Position a laquelle va commencer l'affichage en x*/
-#define STARTY 50   /*Position a laquelle va commencer l'affichage en y*/
-
-
-/* DEFINITION DU PLATEAU */
-int plateau [WIDTH][HEIGHT];
-
+#include "affichage.h"
+#include "main.h"
 
  /**** AFFICHAGE DES PIONS PLACES SUR LE PLATEAU ****/
  void affichage_pion(){
