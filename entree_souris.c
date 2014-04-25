@@ -1,3 +1,5 @@
+#include <ncurses.h>
+#include "entree_souris.h"
 
 void recupererSouris() {
 	int c;
