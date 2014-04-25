@@ -2,6 +2,7 @@
 #include "deplacement_tigre.c"
 #include "placement_chevre.c"
 #include "fin_partie.c"
+#include "sauvegarde.c"
 
 
 /**** FONCTION D'INITIALISATION DU PLATEAU ****/
@@ -52,6 +53,7 @@ int main (){
         refresh();
         detection_fin_partie(chevre_mangee,0);
         //getch();();
+        sauvegarde (1,0,JOUEUR_CHEVRE);
 
    }  
 
