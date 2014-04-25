@@ -1,0 +1,5 @@
+\board
+T...T...T.........G.T....\endboard
+\player G
+\phase 1
+\captured 0
