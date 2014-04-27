@@ -1,69 +1,108 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
+#include <assert.h>
 #include "main.h"
 
 #include "affichage.h"
-#include "deplacement_tigre.h"
-#include "placement_chevre.h"
+#include "tigre.h"
+#include "chevre.h"
 #include "fin_partie.h"
 #include "entree_souris.h"
 #include "sauvegarde.h"
 
-/**** FONCTION D'INITIALISATION DU PLATEAU ****/
-/**** PLACE LES TIGRES DANS LES ANGLES DU PLATEAU ET MET A VIDE LES AUTRES CASES ****/
-void initialiser_plateau (){
-  int i,j;
-  for (i=0; i < HEIGHT ;i++){
-    for (j=0 ; j < WIDTH ; j++){
-      plateau[i][j]=0;
-    }
-  }
-  /*Placement des tigres dans chaque angles du plateau*/
-  plateau[0][4]=TIGRE;
-  plateau[0][0]=TIGRE;
-  plateau[4][0]=TIGRE;
-  plateau[4][4]=TIGRE;
+int main () {
+	main_initialisation();
+	affichage();
+
+	int x_grille, y_grille;
+	int retour;
+	while (plateau.nb_chevres_placees < 20){
+		/* l'utilisateur doit pouvoir à partir de maintenant 
+		   placer une chèvre, quitter, sauvegarder, charger une autre partie.
+		   On veut donc tou d'abord récupérer un clic de souris
+		*/
+		retour = ES_recuperer_case(&x_grille, &y_grille); // récupère le type de case cliquée et ses coordonnées sur la grille
+		mvprintw(0,0, "%d", retour);
+
+		if (plateau.joueur_courant == CHEVRE) {
+			if (plateau.phase == PLACEMENT && retour == VIDE) {
+				chevre_placement(x_grille, y_grille);
+				main_joueur_suivant();
+				affichage();
+			}
+			else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
+				// déplacer chèvre
+			}
+		}
+		else {
+			if (retour == TIGRE) {
+				tigre_deplacement(x_grille, y_grille);
+				main_joueur_suivant();
+				affichage();
+			}
+		}
+
+		// verification_placement_chevre(&chevre_placee);
+		// affichage_pion();
+		// affichage_info(chevre_placee, chevre_mangee,JOUEUR_TIGRE);
+
+		// refresh();
+		// verification_deplacement_tigre(&chevre_mangee);
+		// affichage_pion();
+		// affichage_info(chevre_placee, chevre_mangee,JOUEUR_CHEVRE);
+		// refresh();
+		// detection_fin_partie(chevre_mangee,0);
+		//getch();
+	}  
+
+	/* Fermeture de Ncurses */
+	endwin();
+
+	return 0;
 }
 
+void main_initialisation () {
+	/* Initialisation de la structure PlateauBC */
+	plateau.nb_chevres_placees = 0;
+	plateau.nb_chevres_mangees = 0;
+	plateau.joueur_courant = CHEVRE;
+	plateau.phase = PLACEMENT;
 
+	/* Initialisation de la grille 
+	 * Place les tigres dans les angles et met à VIDE 
+	 * les autres cases */
+	int i,j;
+	for (i=0; i < NB_CASES_X; i++) {
+		for (j=0; j < NB_CASES_Y; j++) {
+			plateau.grille[i][j] = VIDE;
+		}
+	}
+	plateau.grille[0][4] = TIGRE;
+	plateau.grille[0][0] = TIGRE;
+	plateau.grille[4][0] = TIGRE;
+	plateau.grille[4][4] = TIGRE;
 
-int main (){
-  int chevre_placee = 0, chevre_mangee = 0;
-  int joueur = JOUEUR_CHEVRE  ;
+	/* Initialisation de Ncurses */
+	clear();
+	initscr();
+	curs_set(0);
+	noecho();
+}
 
-  /* Préparation de Ncurses */
-  initscr();
-  curs_set(0);
-  noecho();
-  clear();
+/* Passe au joueur suivant */
+void main_joueur_suivant () {
+	if (plateau.joueur_courant == CHEVRE)
+		plateau.joueur_courant = TIGRE;
+	else
+		plateau.joueur_courant = CHEVRE;
+}
 
-  /* Départ de la partie */
-  initialiser_plateau();
-  affichage(chevre_placee,chevre_mangee,joueur);
-  refresh();
+void main_verifier_extra_cases (int choix) {
+	// servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
+}
 
-  /* Phase de placement */
-  while (chevre_placee < 20){
-
-        refresh();
-        verification_placement_chevre(&chevre_placee);
-        affichage_pion();
-        affichage_info(chevre_placee, chevre_mangee,JOUEUR_TIGRE);
-
-        refresh();
-        verification_deplacement_tigre(&chevre_mangee);
-        affichage_pion();
-        affichage_info(chevre_placee, chevre_mangee,JOUEUR_CHEVRE);
-        refresh();
-        detection_fin_partie(chevre_mangee,0);
-        //getch();();
-
-   }  
-
-
-  /* Fermeture de Ncurses */
-  endwin();
-
-  return 0;
+void debug (int n) {
+	mvprintw(0,0,"debug %d", n);
+	refresh();
 }
