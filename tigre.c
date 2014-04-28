@@ -4,12 +4,14 @@
 #include "tigre.h"
 #include "main.h"
 #include "entree_souris.h"
+#include "affichage.h"
 
 void tigre_deplacement (int x1, int y1) {
-	// Ce serait bien de mettre la case en "surbrillance"
+	affichage_surbrillance (x1, y1);
+
 	int x2, y2, retour_case;
 	while (1) {
-		retour_case = ES_recuperer_case(&x2, &y2);
+		retour_case = ES_recuperer_action(&x2, &y2);
 		if (retour_case == VIDE) {
 			if (cases_adjacentes(x1, y1, x2, y2)) {
 				plateau.grille[x1][y1] = VIDE;
@@ -30,12 +32,10 @@ void tigre_deplacement (int x1, int y1) {
 
 bool cases_adjacentes (int x1, int y1, int x2, int y2) {
 	if ((abs(x1-x2) == 1 && abs(y1-y2) == 0) || (abs(x1-x2) == 0 && abs(y1-y2) == 1)) {// si déplacement "carré" de 1
-		debug(3);
 		return true;
 	}
 	else if ((x1 + y1) % 2 == 0) { // si la case de départ a accès aux diagonales de la grille
 		if (abs(x1-x2) == 1 && abs(y1-y2) == 1) {
-			debug(4);
 			return true;
 		}
 	}
@@ -47,13 +47,11 @@ bool saute_chevre (int x1, int y1, int x2, int y2) {
 		return false;
 
 	if ((abs(x1-x2) == 0 && abs(y1-y2) == 2) || (abs(x1-x2) == 2 && abs(y1-y2) == 0)) { // si déplacement "carré" de 2
-		debug(5);
 		return true;
 	}
 
 	if ((x1 + y1) % 2 == 0 && (abs(x1-x2) == 2 && abs(y1-y2) == 2)) {
 		// Si la case a accès aux diagonales et à fait un déplacement diagonal de 2
-		debug(6);
 		return true;
 		}
 	return false;

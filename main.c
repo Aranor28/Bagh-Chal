@@ -7,9 +7,10 @@
 #include "affichage.h"
 #include "tigre.h"
 #include "chevre.h"
-#include "fin_partie.h"
+#include "partie.h"
 #include "entree_souris.h"
 #include "sauvegarde.h"
+#include "chargement.h"
 
 int main () {
 	main_initialisation();
@@ -22,14 +23,20 @@ int main () {
 		   placer une chèvre, quitter, sauvegarder, charger une autre partie.
 		   On veut donc tou d'abord récupérer un clic de souris
 		*/
-		retour = ES_recuperer_case(&x_grille, &y_grille); // récupère le type de case cliquée et ses coordonnées sur la grille
-		mvprintw(0,0, "%d", retour);
+		retour = ES_recuperer_action(&x_grille, &y_grille); // récupère le type de case cliquée et ses coordonnées sur la grille
 
+		if (retour == SAUVEGARDER) {
+			sauvegarder_partie();
+			debug("sauvegarde effectuée.");
+		}
+		else if (retour == CHARGER) {
+			charger_partie(NOM_FICHIER_SAUVEGARDE);
+			debug("chargement effectué.");
+		}
 		if (plateau.joueur_courant == CHEVRE) {
 			if (plateau.phase == PLACEMENT && retour == VIDE) {
 				chevre_placement(x_grille, y_grille);
 				main_joueur_suivant();
-				affichage();
 			}
 			else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
 				// déplacer chèvre
@@ -39,9 +46,9 @@ int main () {
 			if (retour == TIGRE) {
 				tigre_deplacement(x_grille, y_grille);
 				main_joueur_suivant();
-				affichage();
 			}
 		}
+		affichage();
 
 		// verification_placement_chevre(&chevre_placee);
 		// affichage_pion();
@@ -88,6 +95,10 @@ void main_initialisation () {
 	initscr();
 	curs_set(0);
 	noecho();
+	start_color();
+
+	/* Initialisation des différentes paires de couleurs qui vont être utilisées */
+	affichage_init_color_pairs();
 }
 
 /* Passe au joueur suivant */
@@ -102,7 +113,7 @@ void main_verifier_extra_cases (int choix) {
 	// servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
 }
 
-void debug (int n) {
-	mvprintw(0,0,"debug %d", n);
+void debug (char str[]) {
+	mvprintw(Y_CHAMP_ERREUR, X_CHAMP_ERREUR, "debug: %s", str);
 	refresh();
 }

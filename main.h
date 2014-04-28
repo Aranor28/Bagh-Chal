@@ -9,13 +9,18 @@
 #define STARTX 50  /*Position a laquelle va commencer l'affichage en x*/
 #define STARTY 10   /*Position a laquelle va commencer l'affichage en y*/
 
-#define PLACEMENT 0
-#define DEPLACEMENT 1
+#define PLACEMENT 1
+#define DEPLACEMENT 2
 
+#define NOM_FICHIER_SAUVEGARDE "sauvegarde.txt"
+
+/* Différentes cases */
 #define VIDE 0
 #define TIGRE 1
 #define CHEVRE 2
 #define PAS_CASE 3
+#define SAUVEGARDER 4
+#define CHARGER 5
 
 /* DEFINITION DU PLATEAU */
 typedef struct et_plateauBC {
@@ -29,7 +34,7 @@ typedef struct et_plateauBC {
 /* Prototypes */
 void main_initialisation ();
 void main_joueur_suivant ();
-void debug (int n);
+void debug (char str[]);
 
 /* Déclaration de la variable globale */
 PlateauBC plateau;

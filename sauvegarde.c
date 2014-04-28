@@ -8,23 +8,33 @@
  * LE NOMBRE DE CHEVRES MANGEES
  * LE TOUR DU JOUEUR SUIVANT
  */
-void sauvegarde (int chevre_placee, int chevre_mangee, int joueur){
+void sauvegarder_partie () {
 	int i,j;
 
-	FILE * fich = fopen("sauvegarde.txt","w");
+	FILE * fich = fopen(NOM_FICHIER_SAUVEGARDE, "w");
 	if (fich == NULL){
 		fprintf(stderr, "Erreur lors de la sauvegarde du plateau\n");
 		return;
 	}
-
-	for (i = 0; i < 5; i++){
-		for (j = 0; i < 5; j++)	{
-			fprintf(fich,"%d",plateau[i][j]);
+	fprintf(fich, "\\board \n");
+	for (j = 0; j < NB_CASES_Y; j++){
+		for (i = 0; i < NB_CASES_X; i++)	{
+			if (plateau.grille[i][j] == TIGRE)
+				fprintf(fich,"T");
+			else if (plateau.grille[i][j] == CHEVRE)
+				fprintf(fich, "G");
+			else if (plateau.grille[i][j] == VIDE)
+				fprintf(fich, ".");
 		}
 		fprintf(fich,"\n");
 	}
-	fprintf(fich,"%d\n",chevre_placee);
-	fprintf(fich,"%d\n",chevre_mangee);
-	fprintf(fich,"%d\n",joueur);
-	
+	fprintf(fich, "\\endboard\n");
+	if (plateau.joueur_courant == TIGRE)
+		fprintf(fich,"\\player T\n");
+	else
+		fprintf(fich,"\\player G\n");
+
+	fprintf(fich,"\\phase %d\n", plateau.phase);
+	fprintf(fich,"\\captured %d\n", plateau.nb_chevres_mangees);
+	fclose(fich);
 }
