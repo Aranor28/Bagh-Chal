@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <stdbool.h>
+
 #define WIDTH 22    /* LARGEUR DU PLATEAU */
 #define HEIGHT 16    /* LONGUEUR DU PLATEAU */
 #define NB_CASES_X 5
@@ -35,6 +37,7 @@ typedef struct et_plateauBC {
 void main_initialisation ();
 void main_joueur_suivant ();
 void debug (char str[]);
+bool cases_adjacentes (int x1, int y1, int x2, int y2);
 
 /* Déclaration de la variable globale */
 PlateauBC plateau;

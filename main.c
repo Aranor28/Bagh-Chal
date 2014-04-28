@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <assert.h>
+#include <stdbool.h>
 #include "main.h"
 
 #include "affichage.h"
@@ -16,9 +17,10 @@ int main () {
 	main_initialisation();
 	affichage();
 
+	bool partie_terminee = false;
 	int x_grille, y_grille;
 	int retour;
-	while (plateau.nb_chevres_placees < 20){
+	while (!partie_terminee){
 		/* l'utilisateur doit pouvoir à partir de maintenant 
 		   placer une chèvre, quitter, sauvegarder, charger une autre partie.
 		   On veut donc tou d'abord récupérer un clic de souris
@@ -37,7 +39,8 @@ int main () {
 				main_joueur_suivant();
 			}
 			else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
-				// déplacer chèvre
+				chevre_deplacement(x_grille, y_grille);
+				main_joueur_suivant();
 			}
 		}
 		else {
@@ -47,20 +50,10 @@ int main () {
 			}
 		}
 		affichage();
-
-		// verification_placement_chevre(&chevre_placee);
-		// affichage_pion();
-		// affichage_info(chevre_placee, chevre_mangee,JOUEUR_TIGRE);
-
-		// refresh();
-		// verification_deplacement_tigre(&chevre_mangee);
-		// affichage_pion();
-		// affichage_info(chevre_placee, chevre_mangee,JOUEUR_CHEVRE);
-		// refresh();
-		// detection_fin_partie(chevre_mangee,0);
-		//getch();
+		if (plateau.nb_chevres_placees == 20) {
+			plateau.phase = DEPLACEMENT;
+		}
 	}  
-
 	/* Fermeture de Ncurses */
 	endwin();
 
@@ -114,4 +107,17 @@ void main_verifier_extra_cases (int choix) {
 void debug (char str[]) {
 	mvprintw(Y_CHAMP_ERREUR, X_CHAMP_ERREUR, "debug: %s", str);
 	refresh();
+}
+
+/* fonction qui est en fait pour tigre et chèvre !!! */
+bool cases_adjacentes (int x1, int y1, int x2, int y2) {
+	if ((abs(x1-x2) == 1 && abs(y1-y2) == 0) || (abs(x1-x2) == 0 && abs(y1-y2) == 1)) {// si déplacement "carré" de 1
+		return true;
+	}
+	else if ((x1 + y1) % 2 == 0) { // si la case de départ a accès aux diagonales de la grille
+		if (abs(x1-x2) == 1 && abs(y1-y2) == 1) {
+			return true;
+		}
+	}
+	return false;
 }

@@ -27,19 +27,7 @@ void tigre_deplacement (int x1, int y1) {
 			}
 		}
 	}	
-	plateau.grille[x2][y2] = TIGRE;
-}
-
-bool cases_adjacentes (int x1, int y1, int x2, int y2) {
-	if ((abs(x1-x2) == 1 && abs(y1-y2) == 0) || (abs(x1-x2) == 0 && abs(y1-y2) == 1)) {// si déplacement "carré" de 1
-		return true;
-	}
-	else if ((x1 + y1) % 2 == 0) { // si la case de départ a accès aux diagonales de la grille
-		if (abs(x1-x2) == 1 && abs(y1-y2) == 1) {
-			return true;
-		}
-	}
-	return false;
+	// plateau.grille[x2][y2] = TIGRE;
 }
 
 bool saute_chevre (int x1, int y1, int x2, int y2) {
