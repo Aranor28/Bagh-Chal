@@ -16,7 +16,7 @@ void sauvegarder_partie () {
 		fprintf(stderr, "Erreur lors de la sauvegarde du plateau\n");
 		return;
 	}
-	fprintf(fich, "\\board \n");
+	fprintf(fich, "\\board\n");
 	for (j = 0; j < NB_CASES_Y; j++){
 		for (i = 0; i < NB_CASES_X; i++)	{
 			if (plateau.grille[i][j] == TIGRE)

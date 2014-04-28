@@ -17,45 +17,43 @@ int charger_partie (char * nomFich) {
 	}
 
 	fscanf(fich, "%s", chaine);
-	if ( !strcmp(chaine, "\\board") ){
-		fprintf(stderr, "Erreur de fichier\n");
+	if (strcmp(chaine, "\\board")){
+		fprintf(stderr, "Erreur de fichier sur board\n");
 		return (1);
 	}
-	fscanf(fich,"%c", &temp);
 
 	int cpt_chevres = 0;
-	for (i = 0; i < NB_CASES_X; i++){
-		for (j = 0; j < NB_CASES_Y; j++){
-			fscanf(fich,"%c",&temp);
-			if ( temp == 'T')
-				plateau.grille[i][j] = 'T';
-			else if (temp == 'G') {
-				plateau.grille[i][j] = 'G';
+	for (j = 0; j < NB_CASES_Y; j++) {
+		fscanf(fich, "%s", chaine);
+		for (i = 0; i < NB_CASES_X; i++) {
+			if ( chaine[i] == 'T')
+				plateau.grille[i][j] = TIGRE;
+			else if (chaine[i] == 'G') {
+				plateau.grille[i][j] = CHEVRE;
 				cpt_chevres++;
 			}
-			else if (temp == '.')
-				plateau.grille[i][j] = ' ';
+			else if (chaine[i] == '.')
+				plateau.grille[i][j] = VIDE;
+			else
+				debug("caractere invalide");
 		}
-		fscanf(fich, "%c", &temp); // a améliorer ? fgetch ?
-		printf("\n");
 	}
 
 	/*VERIFICATION QUE LE TABLEAU SE FINIT PAR \endboard\n*/
 	fscanf(fich, "%s", chaine);
-	if ( !strcmp(chaine, "\\endboard") ){
-		fprintf(stderr, "Erreur de fichier\n");
+	if (strcmp(chaine, "\\endboard")){
+		fprintf(stderr, "Erreur de fichier sur endboard\n");
 		return (1);
 	}
 
 	/*VERIFICATION DU JOUEUR*/
-	fscanf(fich, "%c%s", &temp,chaine);
-	if ( !strcmp(chaine, "\\player") ){
-		fprintf(stderr, "Erreur de fichier\n");
+	fscanf(fich, "%s ", chaine);
+	if (strcmp(chaine, "\\player")){
+		fprintf(stderr, "Erreur de fichier sur player\n");
 		return (1);
 	}
 
-	fscanf(fich,"%c", &temp);
-	fscanf(fich,"%c", &temp);
+	temp = fgetc(fich);
 	if (temp != 'T' && temp != 'G'){
 		fprintf(stderr, "Erreur de joueur\n");
 		return (1);
@@ -66,27 +64,26 @@ int charger_partie (char * nomFich) {
 		plateau.joueur_courant = CHEVRE;
 
 	/*VERIFICATION DE LA PHASE*/
-	fscanf(fich,"%c", &temp);
-	fscanf(fich, "%s", chaine);
-	if ( !strcmp(chaine, "\\phase") ){
-		fprintf(stderr, "Erreur de fichier\n");
+	fscanf(fich, "%s ", chaine);
+	if (strcmp(chaine, "\\phase")){
+		fprintf(stderr, "Erreur de fichier sur phase\n");
 		return (1);
 	}
-	fscanf(fich, "%c%d", &temp, &(plateau.phase));
+	fscanf(fich, "%d", &(plateau.phase));
 	if (plateau.phase != PLACEMENT && plateau.phase != DEPLACEMENT){
 		fprintf(stderr, "Erreur de fichier\n");
 		return (1);
 	}
 
 	/*VERIFICATION DES CHEVRES CAPTUREES*/
-	fscanf(fich, "%c%s", &temp, chaine);
-	if ( !strcmp(chaine, "\\captured") ){
-		fprintf(stderr, "Erreur de fichier\n");
+	fscanf(fich, "%s ", chaine);
+	if (strcmp(chaine, "\\captured")){
+		fprintf(stderr, "Erreur de fichier sur captured\n");
 		return (1);
 	}
-	fscanf(fich, "%c%d", &temp, &(plateau.nb_chevres_mangees));
+	fscanf(fich, "%d", &(plateau.nb_chevres_mangees));
 	if (plateau.nb_chevres_mangees < 0 && plateau.nb_chevres_mangees > 20) { // >= 20 plutot ?
-		fprintf(stderr, "Erreur de fichier\n");
+		fprintf(stderr, "Erreur de fichier sur le nombre de chevres capturées\n");
 		return (1);
 	}
 

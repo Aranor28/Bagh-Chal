@@ -27,11 +27,9 @@ int main () {
 
 		if (retour == SAUVEGARDER) {
 			sauvegarder_partie();
-			debug("sauvegarde effectuée.");
 		}
 		else if (retour == CHARGER) {
 			charger_partie(NOM_FICHIER_SAUVEGARDE);
-			debug("chargement effectué.");
 		}
 		if (plateau.joueur_courant == CHEVRE) {
 			if (plateau.phase == PLACEMENT && retour == VIDE) {
