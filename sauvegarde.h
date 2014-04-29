@@ -1,6 +1,7 @@
+
 #ifndef SAUVEGARDE_H
 #define SAUVEGARDE_H
 
-void sauvegarde (int chevre_placee, int chevre_mangee, int joueur);
+void sauvegarde (int tigre_bloque, int phase, int joueur);
 
 #endif

@@ -9,6 +9,7 @@
 #include "fin_partie.h"
 #include "entree_souris.h"
 #include "sauvegarde.h"
+#include "ouverture.h"
 
 /**** FONCTION D'INITIALISATION DU PLATEAU ****/
 /**** PLACE LES TIGRES DANS LES ANGLES DU PLATEAU ET MET A VIDE LES AUTRES CASES ****/
@@ -29,7 +30,7 @@ void initialiser_plateau (){
 
 
 int main (){
-  int chevre_placee = 0, chevre_mangee = 0;
+  int chevre_placee = 0, chevre_mangee = 0, fin_partie = 0,phase;
   int joueur = JOUEUR_CHEVRE  ;
 
   /* Préparation de Ncurses */
@@ -40,27 +41,30 @@ int main (){
 
   /* Départ de la partie */
   initialiser_plateau();
+
+  chevre_placee = ouverture("sauvegarde.txt",&chevre_mangee,&phase,&joueur);
   affichage(chevre_placee,chevre_mangee,joueur);
   refresh();
 
-  /* Phase de placement */
-  while (chevre_placee < 20){
+  // /* Phase de placement */
+  // while (chevre_placee < 20 && fin_partie == 0){
 
-        refresh();
-        verification_placement_chevre(&chevre_placee);
-        affichage_pion();
-        affichage_info(chevre_placee, chevre_mangee,JOUEUR_TIGRE);
+  //       refresh();
+  //       verification_placement_chevre(&chevre_placee);
+  //       affichage_pion();
+  //       affichage_info(chevre_placee, chevre_mangee,JOUEUR_TIGRE);
 
-        refresh();
-        verification_deplacement_tigre(&chevre_mangee);
-        affichage_pion();
-        affichage_info(chevre_placee, chevre_mangee,JOUEUR_CHEVRE);
-        refresh();
-        detection_fin_partie(chevre_mangee,0);
-        //getch();();
+  //       refresh();
+  //       verification_deplacement_tigre(&chevre_mangee);
+  //       affichage_pion();
+  //       affichage_info(chevre_placee, chevre_mangee,JOUEUR_CHEVRE);
+  //       refresh();
+  //       fin_partie = detection_fin_partie(chevre_mangee,0);
+  //  }  
 
-   }  
-
+  //  /*Sauvegarde de la partie */
+  //   getch();
+  //  sauvegarde(chevre_placee,chevre_mangee,JOUEUR_CHEVRE);
 
   /* Fermeture de Ncurses */
   endwin();
