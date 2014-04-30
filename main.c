@@ -17,10 +17,10 @@ int main () {
 	main_initialisation();
 	affichage();
 
-	bool partie_terminee = false;
+	int gagnant = VIDE; // == 0
 	int x_grille, y_grille;
 	int retour;
-	while (!partie_terminee){
+	while (!gagnant){
 		/* l'utilisateur doit pouvoir à partir de maintenant 
 		   placer une chèvre, quitter, sauvegarder, charger une autre partie.
 		   On veut donc tou d'abord récupérer un clic de souris
@@ -33,26 +33,28 @@ int main () {
 		else if (retour == CHARGER) {
 			charger_partie(NOM_FICHIER_SAUVEGARDE);
 		}
-		if (plateau.joueur_courant == CHEVRE) {
-			if (plateau.phase == PLACEMENT && retour == VIDE) {
-				chevre_placement(x_grille, y_grille);
-				main_joueur_suivant();
-			}
-			else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
-				chevre_deplacement(x_grille, y_grille);
-				main_joueur_suivant();
-			}
-		}
 		else {
-			if (retour == TIGRE) {
-				tigre_deplacement(x_grille, y_grille);
-				main_joueur_suivant();
+			if (plateau.joueur_courant == CHEVRE) {
+				if (plateau.phase == PLACEMENT && retour == VIDE) {
+					chevre_placement(x_grille, y_grille);
+				}
+				else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
+					chevre_deplacement(x_grille, y_grille);
+				}
 			}
+			else { // joueur_courant == TIGRE
+				if (retour == TIGRE) {
+					tigre_deplacement(x_grille, y_grille);
+				}
+			}
+			gagnant = partie_detection_vainqueur();
+			main_joueur_suivant();
 		}
-		affichage();
+
 		if (plateau.nb_chevres_placees == 20) {
 			plateau.phase = DEPLACEMENT;
 		}
+		affichage();
 	}  
 	/* Fermeture de Ncurses */
 	endwin();
