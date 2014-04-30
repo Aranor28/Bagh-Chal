@@ -1,0 +1,10 @@
+\board
+T...T
+.G...
+.....
+.....
+T...T
+\endboard
+\player T
+\phase 1
+\captured 6
