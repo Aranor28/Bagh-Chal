@@ -6,7 +6,8 @@
 
 void affichage_init_color_pairs () {
 	/* Paires de couleurs des lignes d'informations */
-	init_pair(COULEURS_NBCHEVRES, COLOR_BLACK, COLOR_CYAN);
+	init_pair(COULEURS_NBCHEVRES_PLACEES, COLOR_GREEN, COLOR_BLACK);
+	init_pair(COULEURS_NBCHEVRES_MANGEES, COLOR_RED, COLOR_BLACK);
 	init_pair(COULEURS_TOUR_TIGRE, COLOR_WHITE,COLOR_RED);
 	init_pair(COULEURS_TOUR_CHEVRE, COLOR_WHITE,COLOR_GREEN);
 
@@ -16,8 +17,12 @@ void affichage_init_color_pairs () {
 	init_pair(COULEURS_CASE_CHEVRE, COLOR_GREEN,COLOR_BLACK);
 
 	/* Paires de couleurs des cases en surbrillance */
-	init_pair(COULEURS_CASE_TIGRE_SURBRILLANCE, COLOR_BLACK, COLOR_RED);
-	init_pair(COULEURS_CASE_CHEVRE_SURBRILLANCE, COLOR_BLACK, COLOR_GREEN);
+	init_pair(COULEURS_CASE_TIGRE_SURBRILLANCE, COLOR_WHITE, COLOR_RED);
+	init_pair(COULEURS_CASE_CHEVRE_SURBRILLANCE, COLOR_WHITE, COLOR_GREEN);
+
+	/* Paires de couleurs des boutons de sauvegarde et chargement */
+	init_pair(COULEURS_BOUTON_SAUVEGARDE,COLOR_WHITE,COLOR_CYAN);
+	init_pair(COULEURS_BOUTON_CHARGER,COLOR_WHITE,COLOR_CYAN);
 }
 
 void affichage () {
@@ -30,11 +35,16 @@ void affichage () {
 
 /****  AFFICHAGE DES INFORMATIONS CONCERNANT LE DEROULEMENT DU JEU ****/
 void affichage_info(){
-	/*Affichage du nombre de chèvres*/
-	attron(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES));
-	mvprintw(Y_NBCHEVRES, X_NBCHEVRES, "%02d Chevre(s) en réserve, %d  Chevre(s) mangée(s)\n"
-		,(20 - plateau.nb_chevres_placees), plateau.nb_chevres_mangees);
-	attroff(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES));
+	/*Affichage du nombre de chèvres placées*/
+	attron(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_PLACEES));
+	mvprintw(Y_NBCHEVRES, X_NBCHEVRES, "%02d Chevre(s) en réserve"
+		,(20 - plateau.nb_chevres_placees));
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_PLACEES));
+
+	/*Affichage du nombre de chèvres mangées */
+	attron(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_MANGEES));
+	mvprintw(Y_NBCHEVRES + 1, X_NBCHEVRES, "%01d /7 Chevre(s) mangée(s)\n", plateau.nb_chevres_mangees);
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_MANGEES));
 
 	/*Affichage du tour du joueur*/
 	if (plateau.joueur_courant == TIGRE){
@@ -75,8 +85,14 @@ void affichage_pion(){
 }
 
 void affichage_bouttons() {
-	mvprintw(Y_SAUVEGARDER, X_SAUVEGARDER, BOUTTON_SAUVEGARDER);
-	mvprintw(Y_CHARGER, X_CHARGER, BOUTTON_CHARGER);
+	
+	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_SAUVEGARDE));
+	mvprintw(Y_SAUVEGARDER, X_SAUVEGARDER,"[" BOUTTON_SAUVEGARDER "]");
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_SAUVEGARDE));
+
+	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_CHARGER));
+	mvprintw(Y_CHARGER, X_CHARGER,"[" BOUTTON_CHARGER "]");
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_CHARGER));
 } 
 
 /**** AFFICHAGE DE LA GRILLE DU PLATEAU DE JEU ****/
@@ -110,6 +126,24 @@ void affichage_surbrillance (int x, int y) {
 	else {
 		attron(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
 		mvprintw(y*4 + STARTY, x*5 + STARTX, "[C]");
+		attroff(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
+	}
+}
+
+
+void affichage_gagnant (int nb_chevres_mangees, int nb_tigres_bloques){
+	if (nb_chevres_mangees == 7){
+		attron(A_BOLD | COLOR_PAIR(COULEURS_CASE_TIGRE_SURBRILLANCE));
+		mvprintw(STARTY + STARTY/2, STARTX - STARTX/8, "**************************************");
+		mvprintw(STARTY + STARTY/2 +1, STARTX - STARTX/8, "*C'EST LE JOUEUR TIGRE QUI A GAGNE !!*");
+		mvprintw(STARTY + STARTY/2 +2, STARTX - STARTX/8, "**************************************");
+		attroff(A_BOLD  | COLOR_PAIR(COULEURS_CASE_TIGRE_SURBRILLANCE));
+	}
+	else if (nb_tigres_bloques == 4){
+		attron(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
+		mvprintw(STARTY + STARTY/2, STARTX - STARTX/8, "**************************************");
+		mvprintw(STARTY + STARTY/2 +1, STARTX - STARTX/8, "*C'EST LE JOUEUR CHEVRE QUI A GAGNE !!*");
+		mvprintw(STARTY + STARTY/2 +2, STARTX - STARTX/8, "**************************************");
 		attroff(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
 	}
 }

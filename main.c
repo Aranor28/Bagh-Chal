@@ -17,10 +17,10 @@ int main () {
 	main_initialisation();
 	affichage();
 
-	int gagnant = VIDE; // == 0
+	bool partie_terminee = false;
 	int x_grille, y_grille;
 	int retour;
-	while (!gagnant){
+	while (!partie_terminee){
 		/* l'utilisateur doit pouvoir à partir de maintenant 
 		   placer une chèvre, quitter, sauvegarder, charger une autre partie.
 		   On veut donc tou d'abord récupérer un clic de souris
@@ -33,29 +33,30 @@ int main () {
 		else if (retour == CHARGER) {
 			charger_partie(NOM_FICHIER_SAUVEGARDE);
 		}
-		else {
-			if (plateau.joueur_courant == CHEVRE) {
-				if (plateau.phase == PLACEMENT && retour == VIDE) {
-					chevre_placement(x_grille, y_grille);
-				}
-				else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
-					chevre_deplacement(x_grille, y_grille);
-				}
+		if (plateau.joueur_courant == CHEVRE) {
+			if (plateau.phase == PLACEMENT && retour == VIDE) {
+				chevre_placement(x_grille, y_grille);
+				main_joueur_suivant();
 			}
-			else { // joueur_courant == TIGRE
-				if (retour == TIGRE) {
-					tigre_deplacement(x_grille, y_grille);
-				}
+			else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
+				chevre_deplacement(x_grille, y_grille);
+				main_joueur_suivant();
 			}
-			gagnant = partie_detection_vainqueur();
-			main_joueur_suivant();
 		}
-
+		else {
+			if (retour == TIGRE) {
+				tigre_deplacement(x_grille, y_grille);
+				main_joueur_suivant();
+			}
+		}
+		affichage();
 		if (plateau.nb_chevres_placees == 20) {
 			plateau.phase = DEPLACEMENT;
 		}
-		affichage();
+		partie_terminee = detection_fin_partie (plateau.nb_chevres_mangees, 0);
 	}  
+	affichage_gagnant(plateau.nb_chevres_mangees,0);
+	getch();
 	/* Fermeture de Ncurses */
 	endwin();
 
@@ -108,7 +109,7 @@ void main_verifier_extra_cases (int choix) {
 
 void debug (char str[]) {
 	mvprintw(Y_CHAMP_ERREUR, X_CHAMP_ERREUR, "debug: %s", str);
-	refresh();
+	refresh();  
 }
 
 /* fonction qui est en fait pour tigre et chèvre !!! */
