@@ -55,7 +55,8 @@ int main () {
 			plateau.phase = DEPLACEMENT;
 		}
 		affichage();
-	}  
+	}
+	
 	/* Fermeture de Ncurses */
 	endwin();
 
