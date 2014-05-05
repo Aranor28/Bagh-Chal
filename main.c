@@ -21,9 +21,9 @@ int main () {
 	int x_grille, y_grille;
 	int retour;
 	while (!gagnant){
-		/* l'utilisateur doit pouvoir à partir de maintenant 
-		   placer une chèvre, quitter, sauvegarder, charger une autre partie.
-		   On veut donc tou d'abord récupérer un clic de souris
+		/* l'utilisateur doit pouvoir à partir de maintenant
+		placer une chèvre, quitter, sauvegarder, charger une autre partie.
+		On veut donc tou d'abord récupérer un clic de souris
 		*/
 		retour = ES_recuperer_action(&x_grille, &y_grille); // récupère le type de case cliquée et ses coordonnées sur la grille
 
@@ -44,7 +44,7 @@ int main () {
 			}
 			else { // joueur_courant == TIGRE
 				if (retour == TIGRE) {
-					tigre_deplacement(x_grille, y_grille);
+				tigre_deplacement(x_grille, y_grille);
 				}
 			}
 			gagnant = partie_detection_vainqueur();
@@ -55,7 +55,7 @@ int main () {
 			plateau.phase = DEPLACEMENT;
 		}
 		affichage();
-	}  
+	}
 	/* Fermeture de Ncurses */
 	endwin();
 
@@ -69,9 +69,9 @@ void main_initialisation () {
 	plateau.joueur_courant = CHEVRE;
 	plateau.phase = PLACEMENT;
 
-	/* Initialisation de la grille 
-	 * Place les tigres dans les angles et met à VIDE 
-	 * les autres cases */
+	/* Initialisation de la grille
+	* Place les tigres dans les angles et met à VIDE
+	* les autres cases */
 	int i,j;
 	for (i=0; i < NB_CASES_X; i++) {
 		for (j=0; j < NB_CASES_Y; j++) {
@@ -103,7 +103,7 @@ void main_joueur_suivant () {
 }
 
 void main_verifier_extra_cases (int choix) {
-	// servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
+// servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
 }
 
 void debug (char str[]) {
