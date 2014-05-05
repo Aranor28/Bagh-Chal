@@ -37,6 +37,6 @@ void affichage_plateau ();
 void affichage_info ();
 void affichage_bouttons();
 void affichage_surbrillance (int x, int y);
-void affichage_gagnant (int nb_chevres_mangees, int nb_tigres_bloques);
+void affichage_gagnant (int gagnant);
 
 #endif

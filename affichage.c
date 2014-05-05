@@ -131,15 +131,15 @@ void affichage_surbrillance (int x, int y) {
 }
 
 
-void affichage_gagnant (int nb_chevres_mangees, int nb_tigres_bloques){
-	if (nb_chevres_mangees == 7){
+void affichage_gagnant (int gagnant){
+	if (gagnant == TIGRE){
 		attron(A_BOLD | COLOR_PAIR(COULEURS_CASE_TIGRE_SURBRILLANCE));
 		mvprintw(STARTY + STARTY/2, STARTX - STARTX/8, "**************************************");
 		mvprintw(STARTY + STARTY/2 +1, STARTX - STARTX/8, "*C'EST LE JOUEUR TIGRE QUI A GAGNE !!*");
 		mvprintw(STARTY + STARTY/2 +2, STARTX - STARTX/8, "**************************************");
 		attroff(A_BOLD  | COLOR_PAIR(COULEURS_CASE_TIGRE_SURBRILLANCE));
 	}
-	else if (nb_tigres_bloques == 4){
+	else {
 		attron(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
 		mvprintw(STARTY + STARTY/2, STARTX - STARTX/8, "**************************************");
 		mvprintw(STARTY + STARTY/2 +1, STARTX - STARTX/8, "*C'EST LE JOUEUR CHEVRE QUI A GAGNE !!*");

@@ -37,18 +37,20 @@ int main () {
 			if (plateau.joueur_courant == CHEVRE) {
 				if (plateau.phase == PLACEMENT && retour == VIDE) {
 					chevre_placement(x_grille, y_grille);
+					main_joueur_suivant();
 				}
 				else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
 					chevre_deplacement(x_grille, y_grille);
+					main_joueur_suivant();
 				}
 			}
 			else { // joueur_courant == TIGRE
 				if (retour == TIGRE) {
-				tigre_deplacement(x_grille, y_grille);
+					tigre_deplacement(x_grille, y_grille);
+					main_joueur_suivant();
 				}
 			}
 			gagnant = partie_detection_vainqueur();
-			main_joueur_suivant();
 		}
 
 		if (plateau.nb_chevres_placees == 20) {
@@ -56,10 +58,8 @@ int main () {
 		}
 		affichage();
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> 73f27f672ddf3ff6acddb565f28d8c1463520456
+	affichage_gagnant (gagnant);
+	getch();
 	/* Fermeture de Ncurses */
 	endwin();
 
