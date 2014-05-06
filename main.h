@@ -23,6 +23,7 @@
 #define PAS_CASE 3
 #define SAUVEGARDER 4
 #define CHARGER 5
+#define ANNULER 6
 
 /* DEFINITION DU PLATEAU */
 typedef struct et_plateauBC {
@@ -36,8 +37,7 @@ typedef struct et_plateauBC {
 /* Prototypes */
 void main_initialisation ();
 void main_joueur_suivant ();
-void debug (char str[]);
-bool cases_adjacentes (int x1, int y1, int x2, int y2);
+void debug (char str[], int n);
 
 /* Déclaration de la variable globale */
 PlateauBC plateau;

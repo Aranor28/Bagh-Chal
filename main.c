@@ -33,24 +33,29 @@ int main () {
 		else if (retour == CHARGER) {
 			charger_partie(NOM_FICHIER_SAUVEGARDE);
 		}
+		else if (retour == ANNULER) {
+			// annuler dernier coup
+		}
 		else {
 			if (plateau.joueur_courant == CHEVRE) {
 				if (plateau.phase == PLACEMENT && retour == VIDE) {
 					chevre_placement(x_grille, y_grille);
+					gagnant = partie_detection_vainqueur();
 					main_joueur_suivant();
 				}
 				else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
 					chevre_deplacement(x_grille, y_grille);
+					gagnant = partie_detection_vainqueur();
 					main_joueur_suivant();
 				}
 			}
 			else { // joueur_courant == TIGRE
 				if (retour == TIGRE) {
 					tigre_deplacement(x_grille, y_grille);
+					gagnant = partie_detection_vainqueur();
 					main_joueur_suivant();
 				}
 			}
-			gagnant = partie_detection_vainqueur();
 		}
 
 		if (plateau.nb_chevres_placees == 20) {
@@ -110,20 +115,7 @@ void main_verifier_extra_cases (int choix) {
 // servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
 }
 
-void debug (char str[]) {
-	mvprintw(Y_CHAMP_ERREUR, X_CHAMP_ERREUR, "debug: %s", str);
+void debug (char str[], int n) {
+	mvprintw(Y_CHAMP_ERREUR, X_CHAMP_ERREUR, "debug: %s [%d]", str, n);
 	refresh();
-}
-
-/* fonction qui est en fait pour tigre et chèvre !!! */
-bool cases_adjacentes (int x1, int y1, int x2, int y2) {
-	if ((abs(x1-x2) == 1 && abs(y1-y2) == 0) || (abs(x1-x2) == 0 && abs(y1-y2) == 1)) {// si déplacement "carré" de 1
-		return true;
-	}
-	else if ((x1 + y1) % 2 == 0) { // si la case de départ a accès aux diagonales de la grille
-		if (abs(x1-x2) == 1 && abs(y1-y2) == 1) {
-			return true;
-		}
-	}
-	return false;
 }

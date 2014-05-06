@@ -18,6 +18,10 @@ int ES_recuperer_action (int * x_grille, int * y_grille) {
 			// Si on a appuyé sur charger
 			return(CHARGER);
 		}
+		else if (y_win == Y_ANNULER && x_win >= X_ANNULER && x_win <= (X_ANNULER + strlen(BOUTTON_ANNULER))) {
+			// Si on a appuyé sur charger
+			return(ANNULER);
+		}
 		else {
 			// N'importe où ailleur
 			return(PAS_CASE);

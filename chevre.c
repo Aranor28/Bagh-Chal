@@ -4,6 +4,7 @@
 #include "main.h"
 #include "affichage.h"
 #include "entree_souris.h"
+#include "partie.h"
 
 /* Place une chèvre aux coordonnées x, y */
 void chevre_placement (int x, int y) {

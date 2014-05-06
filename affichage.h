@@ -15,6 +15,10 @@
 #define X_CHARGER 5
 #define Y_CHARGER 17
 
+#define BOUTTON_ANNULER " ANNULER "
+#define X_ANNULER 5
+#define Y_ANNULER 19
+
 #define X_CHAMP_ERREUR 4
 #define Y_CHAMP_ERREUR LINES-1
 
@@ -29,6 +33,7 @@
 #define COULEURS_CASE_CHEVRE_SURBRILLANCE 9
 #define COULEURS_BOUTON_SAUVEGARDE 10
 #define COULEURS_BOUTON_CHARGER 11
+#define COULEURS_BOUTON_ANNULER 12
 
 void affichage_init_color_pairs ();
 void affichage ();

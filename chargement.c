@@ -35,7 +35,7 @@ int charger_partie (char * nomFich) {
 			else if (chaine[i] == '.')
 				plateau.grille[i][j] = VIDE;
 			else
-				debug("caractere invalide");
+				debug("caractere invalide", 0);
 		}
 	}
 

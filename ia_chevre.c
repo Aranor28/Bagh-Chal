@@ -1,14 +1,14 @@
-#include "tigre.h"
 #include <stdbool.h>
 #include "main.h"
+#include "tigre.h"
+#include "ia_chevre.h"
 
 
-
-void placement_chevre_ordi(){
+void placement_chevre_ordi() {
 	int i,j;
 	for (i=0; i< NB_CASES_X ;i++){
 		for (j=0 ; j < NB_CASES_Y ; j++){
-			if (plateau.grille[i][j] == VIDE && !tigre_case_adjacente(i,j)) {
+			if (plateau.grille[i][j] == VIDE && !chevre_en_danger(i,j)) {
 				plateau.grille[i][j] = CHEVRE;
 				return;
 			}
@@ -18,7 +18,7 @@ void placement_chevre_ordi(){
 
 /* Fonction qui recherche si il y a un tigre dans les cases adjacentes 
 	et s'il peut manger la chevre */
-bool tigre_case_adjacente (int x, int y){
+bool chevre_en_danger (int x, int y) {
 	int i, j, depart_x, depart_y, fin_x, fin_y, x_final, y_final;
 	bool chevre_mangee = false;
 
@@ -45,11 +45,11 @@ bool tigre_case_adjacente (int x, int y){
 	/* On recherche un tigre dans les cases adjacentes de la chevre */
 	for (i = depart_x; i < fin_x; i++){
 		for (j = depart_y; j < fin_y; j++){
-			if (plateau.grile[i][j] == TIGRE ){
+			if (plateau.grille[i][j] == TIGRE ){
 				x_final = 2 * x - i;
 				y_final = 2 * y - j;
 				/* Si la case d'arrivée du tigre est valide */
-				if (x_final >= 0 && x_final <= 4 && y_final >= 0 && y_final <= 4 && plateau.grile[x_final][y_final] == VIDE)
+				if (x_final >= 0 && x_final <= 4 && y_final >= 0 && y_final <= 4 && plateau.grille[x_final][y_final] == VIDE)
 					chevre_mangee = true;
 			}
 		}
