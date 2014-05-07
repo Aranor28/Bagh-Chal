@@ -20,6 +20,9 @@ int main () {
 	int gagnant = VIDE; // == 0
 	int x_grille, y_grille;
 	int retour;
+
+	affichage_ligne_info("Début de la partie");
+
 	while (!gagnant){
 		/* l'utilisateur doit pouvoir à partir de maintenant
 		placer une chèvre, quitter, sauvegarder, charger une autre partie.

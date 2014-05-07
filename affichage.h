@@ -22,6 +22,9 @@
 #define X_CHAMP_ERREUR 4
 #define Y_CHAMP_ERREUR LINES-1
 
+#define X_LIGNE_INFO 45
+#define Y_LIGNE_INFO 28
+
 #define COULEURS_NBCHEVRES_PLACEES 1
 #define COULEURS_NBCHEVRES_MANGEES 2
 #define COULEURS_TOUR_TIGRE 3
@@ -43,5 +46,6 @@ void affichage_info ();
 void affichage_bouttons();
 void affichage_surbrillance (int x, int y);
 void affichage_gagnant (int gagnant);
+void affichage_ligne_info (char s[]);
 
 #endif

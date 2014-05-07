@@ -152,3 +152,8 @@ void affichage_gagnant (int gagnant){
 		attroff(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
 	}
 }
+
+void affichage_ligne_info (char s[]) {
+	mvprintw(Y_LIGNE_INFO, X_LIGNE_INFO, "%s", s);
+	refresh();
+}
