@@ -63,5 +63,6 @@ void affichage_surbrillance (int x, int y);
 void affichage_gagnant (int gagnant);
 void affichage_ligne_info (char s[]);
 void affichage_menu ();
+void affichage_vider_info ();
 
 #endif

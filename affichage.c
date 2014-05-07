@@ -37,6 +37,7 @@ void affichage () {
 	affichage_bouttons();
 	affichage_plateau();
 	affichage_pion();
+	affichage_vider_info();
 	refresh();
 }
 
@@ -164,9 +165,7 @@ void affichage_ligne_info (char s[]) {
 	refresh();
 }
 
-
 void affichage_menu (){
-
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
 	mvprintw(Y_MENU_JcJ, X_MENU_JcJ,"[" BOUTTON_JcJ "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
@@ -179,6 +178,9 @@ void affichage_menu (){
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
 	mvprintw(Y_MENU_JcIA_CHEVRE, X_MENU_JcIA_CHEVRE,"[" BOUTTON_JcIA_CHEVRE "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
+}
 
-
+void affichage_vider_info () {
+	mvprintw(Y_LIGNE_INFO, X_LIGNE_INFO, "										");
+	refresh();
 }

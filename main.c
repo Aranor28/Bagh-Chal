@@ -29,6 +29,7 @@ int main () {
 	int x_grille, y_grille;
 	int retour;
 
+	// pour tester
 	affichage_ligne_info("Début de la partie");
 	
 	while (!gagnant){
@@ -40,9 +41,11 @@ int main () {
 
 		if (retour == SAUVEGARDER) {
 			sauvegarder_partie();
+			affichage_ligne_info("Sauvegarde effectuée");
 		}
 		else if (retour == CHARGER) {
 			charger_partie(NOM_FICHIER_SAUVEGARDE);
+			affichage_ligne_info("Chargement effectué");
 		}
 		else if (retour == ANNULER) {
 			// annuler dernier coup
