@@ -12,9 +12,17 @@
 #include "entree_souris.h"
 #include "sauvegarde.h"
 #include "chargement.h"
+#include "ia_tigre.h"
+#include "ia_chevre.h"
 
 int main () {
+	bool ia_chevre = false, ia_tigre = true;
 	main_initialisation();
+
+	affichage_menu ();
+	getch();
+	clear(); 
+
 	affichage();
 
 	int gagnant = VIDE; // == 0
@@ -22,7 +30,7 @@ int main () {
 	int retour;
 
 	affichage_ligne_info("Début de la partie");
-
+	
 	while (!gagnant){
 		/* l'utilisateur doit pouvoir à partir de maintenant
 		placer une chèvre, quitter, sauvegarder, charger une autre partie.
@@ -41,17 +49,31 @@ int main () {
 		}
 		else {
 			if (plateau.joueur_courant == CHEVRE) {
-				if (plateau.phase == PLACEMENT && retour == VIDE) {
-					chevre_placement(x_grille, y_grille);
+				if (ia_chevre && plateau.phase == PLACEMENT){
+					placement_chevre_ordi();
 					gagnant = partie_detection_vainqueur();
+					main_joueur_suivant();
 				}
-				else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
-					chevre_deplacement(x_grille, y_grille);
-					gagnant = partie_detection_vainqueur();
+				else if (ia_chevre && plateau.phase == DEPLACEMENT){
+					//Faire l'ia deplacement
+				}
+				else {
+					if (plateau.phase == PLACEMENT && retour == VIDE) {
+						chevre_placement(x_grille, y_grille);
+						gagnant = partie_detection_vainqueur();
+					}
+					else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
+						chevre_deplacement(x_grille, y_grille);
+						gagnant = partie_detection_vainqueur();
+					}
 				}
 			}
 			else { // joueur_courant == TIGRE
-				if (retour == TIGRE) {
+				if (ia_tigre){
+					ia_tigre_deplacement();
+					gagnant = partie_detection_vainqueur();
+				}
+				else if (retour == TIGRE && !ia_tigre) {
 					tigre_deplacement(x_grille, y_grille);
 					gagnant = partie_detection_vainqueur();
 				}
@@ -64,7 +86,6 @@ int main () {
 		affichage();
 	}
 	affichage_gagnant (gagnant);
-	getch();
 	/* Fermeture de Ncurses */
 	endwin();
 

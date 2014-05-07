@@ -10,6 +10,7 @@ void placement_chevre_ordi() {
 		for (j=0 ; j < NB_CASES_Y ; j++){
 			if (plateau.grille[i][j] == VIDE && !chevre_en_danger(i,j)) {
 				plateau.grille[i][j] = CHEVRE;
+				plateau.nb_chevres_placees = plateau.nb_chevres_placees + 1;
 				return;
 			}
 		}
