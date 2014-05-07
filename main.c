@@ -22,6 +22,8 @@ int main () {
 	bool ia_chevre = false, ia_tigre = false;
 
 	main_initialisation();
+	PlateauBC plateauAvant = plateau;
+
 	affichage_menu ();
 	do {
 		retour = ES_recuperer_choix_menu();
@@ -61,7 +63,7 @@ int main () {
 			affichage_ligne_info("Chargement effectué");
 		}
 		else if (retour == ANNULER) {
-			// annuler dernier coup
+			plateau = plateauAvant;
 		}
 		else {
 			if (plateau.joueur_courant == CHEVRE) { // Tour des chèvres
@@ -75,10 +77,12 @@ int main () {
 				}
 				else { // pas ia
 					if (plateau.phase == PLACEMENT && retour == VIDE) {
+						plateauAvant = plateau;
 						chevre_placement(x_grille, y_grille);
 						gagnant = partie_detection_vainqueur();
 					}
 					else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
+						plateauAvant = plateau;
 						chevre_deplacement(x_grille, y_grille);
 						gagnant = partie_detection_vainqueur();
 					}
@@ -91,6 +95,7 @@ int main () {
 					main_joueur_suivant();
 				}
 				else if (retour == TIGRE && !ia_tigre) {
+					plateauAvant = plateau;
 					tigre_deplacement(x_grille, y_grille);
 					gagnant = partie_detection_vainqueur();
 				}
@@ -105,7 +110,6 @@ int main () {
 	affichage_gagnant (gagnant);
 	/* Fermeture de Ncurses */
 	endwin();
-
 	return 0;
 }
 
@@ -150,7 +154,7 @@ void main_joueur_suivant () {
 }
 
 void main_verifier_extra_cases (int choix) {
-// servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
+	// servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
 }
 
 void debug (char str[], int n) {

@@ -34,7 +34,6 @@ void chevre_deplacement (int x1, int y1) {
 			affichage_pion();
 			affichage_surbrillance (x1, y1);
 		}
-
 	}	
 }
 
