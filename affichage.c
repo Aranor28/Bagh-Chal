@@ -24,6 +24,12 @@ void affichage_init_color_pairs () {
 	init_pair(COULEURS_BOUTON_SAUVEGARDE, COLOR_WHITE,COLOR_CYAN);
 	init_pair(COULEURS_BOUTON_CHARGER, COLOR_WHITE,COLOR_CYAN);
 	init_pair(COULEURS_BOUTON_ANNULER, COLOR_WHITE,COLOR_CYAN);
+
+
+	/* Paires de couleurs des boutons du menu */
+	init_pair(COULEURS_BOUTON_JcJ, COLOR_WHITE,COLOR_CYAN);
+	init_pair(COULEURS_BOUTON_JcIA_CHEVRE, COLOR_WHITE, COLOR_RED);
+	init_pair(COULEURS_BOUTON_JcIA_TIGRE, COLOR_WHITE, COLOR_GREEN);
 }
 
 void affichage () {
@@ -156,4 +162,23 @@ void affichage_gagnant (int gagnant){
 void affichage_ligne_info (char s[]) {
 	mvprintw(Y_LIGNE_INFO, X_LIGNE_INFO, "%s", s);
 	refresh();
+}
+
+
+void affichage_menu (){
+
+	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
+	mvprintw(Y_MENU_JcJ, X_MENU_JcJ,"[" BOUTTON_JcJ "]");
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
+
+
+	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_TIGRE));
+	mvprintw(Y_MENU_JcIA_TIGRE, X_MENU_JcIA_TIGRE,"[" BOUTTON_JcIA_TIGRE"]");
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_TIGRE));
+
+	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
+	mvprintw(Y_MENU_JcIA_CHEVRE, X_MENU_JcIA_CHEVRE,"[" BOUTTON_JcIA_CHEVRE "]");
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
+
+
 }

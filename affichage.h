@@ -25,6 +25,18 @@
 #define X_LIGNE_INFO 45
 #define Y_LIGNE_INFO 28
 
+#define BOUTTON_JcJ " Joueur contre Joueur "
+#define X_MENU_JcJ 35
+#define Y_MENU_JcJ 10
+
+#define BOUTTON_JcIA_CHEVRE " Jouer Tigre contre Ordinateur Chèvre "
+#define X_MENU_JcIA_CHEVRE 35
+#define Y_MENU_JcIA_CHEVRE 14
+
+#define BOUTTON_JcIA_TIGRE " Jouer Chevre contre Ordinateur Tigre "
+#define X_MENU_JcIA_TIGRE 35
+#define Y_MENU_JcIA_TIGRE 12
+
 #define COULEURS_NBCHEVRES_PLACEES 1
 #define COULEURS_NBCHEVRES_MANGEES 2
 #define COULEURS_TOUR_TIGRE 3
@@ -37,6 +49,9 @@
 #define COULEURS_BOUTON_SAUVEGARDE 10
 #define COULEURS_BOUTON_CHARGER 11
 #define COULEURS_BOUTON_ANNULER 12
+#define COULEURS_BOUTON_JcJ 12
+#define COULEURS_BOUTON_JcIA_CHEVRE 13
+#define COULEURS_BOUTON_JcIA_TIGRE 14
 
 void affichage_init_color_pairs ();
 void affichage ();
@@ -47,5 +62,6 @@ void affichage_bouttons();
 void affichage_surbrillance (int x, int y);
 void affichage_gagnant (int gagnant);
 void affichage_ligne_info (char s[]);
+void affichage_menu ();
 
 #endif

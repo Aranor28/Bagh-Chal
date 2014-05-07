@@ -5,8 +5,8 @@ EXEC=bagh_chal
 
 all : $(EXEC)
 
-$(EXEC): main.o affichage.o entree_souris.o tigre.o chevre.o partie.o sauvegarde.o chargement.o ia_chevre.o
-	$(CC) main.o affichage.o entree_souris.o tigre.o chevre.o partie.o sauvegarde.o chargement.o ia_chevre.o -o $(EXEC) $(CFLAGS)
+$(EXEC): main.o affichage.o entree_souris.o tigre.o chevre.o partie.o sauvegarde.o chargement.o ia_chevre.o ia_tigre.o
+	$(CC) main.o affichage.o entree_souris.o tigre.o chevre.o partie.o sauvegarde.o chargement.o ia_chevre.o ia_tigre.o -o $(EXEC) $(CFLAGS)
 
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
@@ -34,6 +34,9 @@ chargement.o: chargement.c
 
 ia_chevre.o: ia_chevre.c
 	$(CC) -c ia_chevre.c -o ia_chevre.o $(CFLAGS)
+	
+ia_tigre.o: ia_tigre.c
+	$(CC) -c ia_tigre.c -o ia_tigre.o $(CFLAGS)
 
 clean:
 	rm -rf *.o
