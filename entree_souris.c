@@ -36,6 +36,24 @@ int ES_recuperer_action (int * x_grille, int * y_grille) {
 	return(plateau.grille[*x_grille][*y_grille]);
 }
 
+int ES_recuperer_choix_menu() {
+	int x_win, y_win;
+	ES_recuperer_entree (&x_win, &y_win);
+
+	if (y_win == Y_MENU_JcJ && x_win >= X_MENU_JcJ && x_win <= (X_MENU_JcJ + strlen(BOUTTON_JcJ))) {
+		return(JCJ);
+	}
+	else if (y_win == Y_MENU_JcIA_TIGRE && x_win >= X_MENU_JcIA_TIGRE && x_win <= (X_MENU_JcIA_TIGRE + strlen(BOUTTON_JcIA_TIGRE))) {
+		return(IA_TIGRE);
+	}
+	else if (y_win == Y_MENU_JcIA_CHEVRE && x_win >= X_MENU_JcIA_CHEVRE && x_win <= (X_MENU_JcIA_CHEVRE + strlen(BOUTTON_JcIA_CHEVRE))) {
+		return(IA_CHEVRE);
+	}
+	else {
+		return(VIDE);
+	}
+}
+
 void ES_recuperer_entree (int * x_win, int * y_win) {
 	int c;
 	MEVENT event; // récupèrera l'évènement

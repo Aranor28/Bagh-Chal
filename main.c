@@ -16,19 +16,32 @@
 #include "ia_chevre.h"
 
 int main () {
-	bool ia_chevre = false, ia_tigre = true;
-	main_initialisation();
-
-	affichage_menu ();
-	getch();
-	clear(); 
-
-	affichage();
-
 	int gagnant = VIDE; // == 0
 	int x_grille, y_grille;
-	int retour;
+	int retour = VIDE;
+	bool ia_chevre = false, ia_tigre = false;
 
+	main_initialisation();
+	affichage_menu ();
+	do {
+		retour = ES_recuperer_choix_menu();
+	} while(retour == VIDE);
+
+	switch(retour) {
+		case JCJ:
+			// rien à faire, les ia sont déjà à false
+			break;
+
+		case IA_TIGRE:
+			ia_tigre = true;
+			break;
+
+		case IA_CHEVRE:
+			ia_chevre = true;
+			break;
+	}
+	clear(); 
+	affichage();
 	// pour tester
 	affichage_ligne_info("Début de la partie");
 	
@@ -51,16 +64,16 @@ int main () {
 			// annuler dernier coup
 		}
 		else {
-			if (plateau.joueur_courant == CHEVRE) {
-				if (ia_chevre && plateau.phase == PLACEMENT){
-					placement_chevre_ordi();
+			if (plateau.joueur_courant == CHEVRE) { // Tour des chèvres
+				if (ia_chevre && plateau.phase == PLACEMENT) {
+					ia_chevre_placement();
 					gagnant = partie_detection_vainqueur();
 					main_joueur_suivant();
 				}
-				else if (ia_chevre && plateau.phase == DEPLACEMENT){
+				else if (ia_chevre && plateau.phase == DEPLACEMENT) {
 					//Faire l'ia deplacement
 				}
-				else {
+				else { // pas ia
 					if (plateau.phase == PLACEMENT && retour == VIDE) {
 						chevre_placement(x_grille, y_grille);
 						gagnant = partie_detection_vainqueur();
@@ -71,10 +84,11 @@ int main () {
 					}
 				}
 			}
-			else { // joueur_courant == TIGRE
+			else { // Tour des tigres
 				if (ia_tigre){
 					ia_tigre_deplacement();
 					gagnant = partie_detection_vainqueur();
+					main_joueur_suivant();
 				}
 				else if (retour == TIGRE && !ia_tigre) {
 					tigre_deplacement(x_grille, y_grille);

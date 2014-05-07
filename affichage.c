@@ -170,7 +170,6 @@ void affichage_menu (){
 	mvprintw(Y_MENU_JcJ, X_MENU_JcJ,"[" BOUTTON_JcJ "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
 
-
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_TIGRE));
 	mvprintw(Y_MENU_JcIA_TIGRE, X_MENU_JcIA_TIGRE,"[" BOUTTON_JcIA_TIGRE"]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_TIGRE));

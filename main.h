@@ -16,14 +16,21 @@
 
 #define NOM_FICHIER_SAUVEGARDE "sauvegarde.txt"
 
-/* Différentes cases */
+/* *** Définition des cases *** */
 #define VIDE 0
+
+/* Différentes cases pendent la partie */
 #define TIGRE 1
 #define CHEVRE 2
 #define PAS_CASE 3
 #define SAUVEGARDER 4
 #define CHARGER 5
 #define ANNULER 6
+
+/* Différentes cases pendent le menu */
+#define JCJ 1
+#define IA_TIGRE 2
+#define IA_CHEVRE 3
 
 /* DEFINITION DU PLATEAU */
 typedef struct et_plateauBC {

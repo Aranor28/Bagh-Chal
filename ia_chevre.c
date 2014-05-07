@@ -4,11 +4,11 @@
 #include "ia_chevre.h"
 
 
-void placement_chevre_ordi() {
+void ia_chevre_placement () {
 	int i,j;
 	for (i=0; i< NB_CASES_X ;i++){
 		for (j=0 ; j < NB_CASES_Y ; j++){
-			if (plateau.grille[i][j] == VIDE && !chevre_en_danger(i,j)) {
+			if (plateau.grille[i][j] == VIDE && !ia_chevre_en_danger(i,j)) {
 				plateau.grille[i][j] = CHEVRE;
 				plateau.nb_chevres_placees = plateau.nb_chevres_placees + 1;
 				return;
@@ -19,7 +19,7 @@ void placement_chevre_ordi() {
 
 /* Fonction qui recherche si il y a un tigre dans les cases adjacentes 
 	et s'il peut manger la chevre */
-bool chevre_en_danger (int x, int y) {
+bool ia_chevre_en_danger (int x, int y) {
 	int i, j, depart_x, depart_y, fin_x, fin_y, x_final, y_final;
 	bool chevre_mangee = false;
 

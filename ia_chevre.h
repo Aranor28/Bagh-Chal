@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "main.h"
 
-void placement_chevre_ordi();
-bool chevre_en_danger (int x, int y);
+void ia_chevre_placement ();
+bool ia_chevre_en_danger (int x, int y);
 
 #endif
