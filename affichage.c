@@ -31,6 +31,7 @@ void affichage () {
 	affichage_bouttons();
 	affichage_plateau();
 	affichage_pion();
+	affichage_vider_info();
 	refresh();
 }
 
@@ -155,5 +156,10 @@ void affichage_gagnant (int gagnant){
 
 void affichage_ligne_info (char s[]) {
 	mvprintw(Y_LIGNE_INFO, X_LIGNE_INFO, "%s", s);
+	refresh();
+}
+
+void affichage_vider_info () {
+	mvprintw(Y_LIGNE_INFO, X_LIGNE_INFO, "										");
 	refresh();
 }
