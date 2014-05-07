@@ -18,6 +18,7 @@ void tigre_deplacement (int x1, int y1) {
 			if (cases_adjacentes(x1, y1, x2, y2)) {
 				plateau.grille[x1][y1] = VIDE;
 				plateau.grille[x2][y2] = TIGRE;
+				main_joueur_suivant();
 				return;
 			}
 			else if (saute_chevre(x1, y1, x2, y2)) {
@@ -25,8 +26,15 @@ void tigre_deplacement (int x1, int y1) {
 				plateau.grille[x2][y2] = TIGRE;
 				plateau.grille[(x1+x2)/2][(y1+y2)/2] = VIDE; // la chèvre est mangée
 				plateau.nb_chevres_mangees++;
+				main_joueur_suivant();
 				return;
 			}
+		}
+		else if (retour_case == TIGRE && (x2 != x1 || y2 != y1)) {
+			x1 = x2;
+			y1 = y2;
+			affichage_pion();
+			affichage_surbrillance (x1, y1);
 		}
 	}	
 }

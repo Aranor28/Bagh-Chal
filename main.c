@@ -41,19 +41,16 @@ int main () {
 				if (plateau.phase == PLACEMENT && retour == VIDE) {
 					chevre_placement(x_grille, y_grille);
 					gagnant = partie_detection_vainqueur();
-					main_joueur_suivant();
 				}
 				else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
 					chevre_deplacement(x_grille, y_grille);
 					gagnant = partie_detection_vainqueur();
-					main_joueur_suivant();
 				}
 			}
 			else { // joueur_courant == TIGRE
 				if (retour == TIGRE) {
 					tigre_deplacement(x_grille, y_grille);
 					gagnant = partie_detection_vainqueur();
-					main_joueur_suivant();
 				}
 			}
 		}
