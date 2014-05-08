@@ -48,11 +48,6 @@ bool ia_chevre_en_danger (int x, int y) {
 				x_final = 2 * x - i; // x + (x - i) || point + vecteur
 				y_final = 2 * y - j;
 
-				char temp[100];
-				sprintf(temp, "[%d, %d], tigre : %d, %d", x, y, x_final, y_final);
-				debug(temp, 0);
-				getch();
-
 				/* Si la case d'arrivée du tigre est valide */
 				if (x_final >= 0 && x_final <= 4 && y_final >= 0 && y_final <= 4 && plateau.grille[x_final][y_final] == VIDE)
 					return(true);
