@@ -65,6 +65,11 @@ int main () {
 		else if (retour == ANNULER) {
 			plateau = plateauAvant;
 		}
+		else if (retour == QUITTER) {
+			sauvegarder_partie();
+			endwin();
+			return 0;
+		}
 		else {
 			if (plateau.joueur_courant == CHEVRE) { // Tour des chèvres
 				if (ia_chevre && plateau.phase == PLACEMENT) {

@@ -26,8 +26,6 @@ void ia_tigre_deplacement(){
 			}
 		}
 	}
-
-
 }
 
 

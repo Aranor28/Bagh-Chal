@@ -26,6 +26,7 @@
 #define SAUVEGARDER 4
 #define CHARGER 5
 #define ANNULER 6
+#define QUITTER 7
 
 /* Différentes cases pendent le menu */
 #define JCJ 1

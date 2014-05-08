@@ -22,6 +22,10 @@ int ES_recuperer_action (int * x_grille, int * y_grille) {
 			// Si on a appuyé sur charger
 			return(ANNULER);
 		}
+		else if (y_win == Y_QUITTER && x_win >= X_QUITTER && x_win <= (X_QUITTER + strlen(BOUTTON_QUITTER))) {
+			// Si on a appuyé sur charger
+			return(QUITTER);
+		}
 		else {
 			// N'importe où ailleur
 			return(PAS_CASE);

@@ -37,6 +37,10 @@
 #define X_MENU_JcIA_TIGRE 35
 #define Y_MENU_JcIA_TIGRE 12
 
+#define BOUTTON_QUITTER " Quitter  "
+#define X_QUITTER 5
+#define Y_QUITTER 23
+
 #define COULEURS_NBCHEVRES_PLACEES 1
 #define COULEURS_NBCHEVRES_MANGEES 2
 #define COULEURS_TOUR_TIGRE 3
@@ -52,6 +56,7 @@
 #define COULEURS_BOUTON_JcJ 12
 #define COULEURS_BOUTON_JcIA_CHEVRE 13
 #define COULEURS_BOUTON_JcIA_TIGRE 14
+#define COULEURS_BOUTON_QUITTER 15
 
 void affichage_init_color_pairs ();
 void affichage ();
