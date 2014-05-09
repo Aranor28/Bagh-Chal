@@ -27,15 +27,20 @@ void affichage_init_color_pairs () {
 	init_pair(COULEURS_BOUTON_QUITTER, COLOR_WHITE,COLOR_CYAN);
 
 	/* Paires de couleurs des boutons du menu */
+	init_pair(COULEURS_BIENVENUE, COLOR_WHITE,COLOR_MAGENTA);
 	init_pair(COULEURS_BOUTON_JcJ, COLOR_WHITE,COLOR_CYAN);
 	init_pair(COULEURS_BOUTON_JcIA_CHEVRE, COLOR_WHITE, COLOR_RED);
 	init_pair(COULEURS_BOUTON_JcIA_TIGRE, COLOR_WHITE, COLOR_GREEN);
+
+	/* Paire de couleur de l'aide */
+	init_pair(COULEURS_AIDE, COLOR_RED,COLOR_BLACK);
 }
 
 void affichage () {
-	affichage_info();
+
 	affichage_bouttons();
 	affichage_plateau();
+		affichage_info();
 	affichage_pion();
 	affichage_vider_info();
 	refresh();
@@ -108,6 +113,10 @@ void affichage_bouttons() {
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_QUITTER));
 	mvprintw(Y_QUITTER, X_QUITTER,"[" BOUTTON_QUITTER "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_QUITTER));
+
+	attron(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+	mvprintw(Y_MENU_AIDE, X_MENU_AIDE, BOUTON_AFFICHER_AIDE);
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
 } 
 
 /**** AFFICHAGE DE LA GRILLE DU PLATEAU DE JEU ****/
@@ -156,9 +165,9 @@ void affichage_gagnant (int gagnant){
 	}
 	else {
 		attron(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
-		mvprintw(STARTY + STARTY/2, STARTX - STARTX/8, "**************************************");
+		mvprintw(STARTY + STARTY/2, STARTX - STARTX/8, "***************************************");
 		mvprintw(STARTY + STARTY/2 +1, STARTX - STARTX/8, "*C'EST LE JOUEUR CHEVRE QUI A GAGNE !!*");
-		mvprintw(STARTY + STARTY/2 +2, STARTX - STARTX/8, "**************************************");
+		mvprintw(STARTY + STARTY/2 +2, STARTX - STARTX/8, "***************************************");
 		attroff(A_BOLD | COLOR_PAIR(COULEURS_CASE_CHEVRE_SURBRILLANCE));
 	}
 }
@@ -169,6 +178,11 @@ void affichage_ligne_info (char s[]) {
 }
 
 void affichage_menu (){
+
+	attron(A_BOLD | COLOR_PAIR(COULEURS_BIENVENUE));
+	mvprintw(Y_BIENVENUE, X_BIENVENUE,BIENVENUE);
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_BIENVENUE));
+
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
 	mvprintw(Y_MENU_JcJ, X_MENU_JcJ,"[" BOUTTON_JcJ "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
@@ -180,6 +194,20 @@ void affichage_menu (){
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
 	mvprintw(Y_MENU_JcIA_CHEVRE, X_MENU_JcIA_CHEVRE,"[" BOUTTON_JcIA_CHEVRE "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
+
+	attron(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+	mvprintw(Y_MENU_AIDE, X_MENU_AIDE, BOUTON_AFFICHER_AIDE);
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+
+}
+
+void affichage_aide () {
+	clear();
+	attron(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+	mvprintw(10,0,"Ce jeu se joue à 2 : un joueur ayant quatre tigres et son adversaire vingt chevres\nL'objectif des chevres est d'immobiliser les tigres.\nLes tigres gagnent s'ils capturent suffisamment de chevres pour que celle-ci ne puissent plus les immobiliser (7 chevres).\nLes joueurs doivent chacun leur tour deplacer un de leur pion. Ce sont les chevres qui commencent.\nChaque pion peut se deplacer d'une intersection vers une autre libre en suivant le trace du diagramme.\nLes chevres rentrent en jeu une a une, sur une intersection libre. Tant que toutes les chevres ne sont pas placees, elles ne peuvent pas se deplacer. \nLes tigres peuvent se deplacer meme si toutes les chevres ne sont pas placees.\nUn tigre capture une chevre en sautant par dessus elle, lorsque l'intersection suivante est libre. Un tigre ne peut manger qu'une chevre par coup.\n*******************************************\nPour placer une chevre, cliquez sur une intersection libre.\nPour déplacer un pion (tigre ou chevre) cliquez sur le pion à deplacer puis cliquez sur l'intersection d'arrivee.\nPour de-selection un pion, cliquez sur un autre.\nPour faire jouer l'ordinateur, cliquez n'importe où sur votre terminal.\n\n CLIQUEZ POUR QUITTER CETTE AIDE.\n");
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+	refresh();
+
 }
 
 void affichage_vider_info () {

@@ -69,6 +69,7 @@ void ia_chevre_deplacement () {
 			if (plateau.grille[i][j] == CHEVRE && partie_pion_adjacent(i, j, VIDE, &x, &y)) {
 				plateau.grille[i][j] = VIDE;
 				plateau.grille[x][y] = CHEVRE;
+				return;
 			}
 		}
 	}
