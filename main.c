@@ -78,18 +78,18 @@ int main () {
 					main_joueur_suivant();
 				}
 				else if (ia_chevre && plateau.phase == DEPLACEMENT) {
-					//Faire l'ia deplacement
+					ia_chevre_deplacement();
+					gagnant = partie_detection_vainqueur();
+					main_joueur_suivant();
 				}
 				else { // pas ia
 					if (plateau.phase == PLACEMENT && retour == VIDE) {
 						plateauAvant = plateau;
-						chevre_placement(x_grille, y_grille);
-						gagnant = partie_detection_vainqueur();
+						chevre_placement(x_grille, y_grille, &gagnant);
 					}
 					else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
 						plateauAvant = plateau;
-						chevre_deplacement(x_grille, y_grille);
-						gagnant = partie_detection_vainqueur();
+						chevre_deplacement(x_grille, y_grille, &gagnant);
 					}
 				}
 			}
@@ -101,8 +101,7 @@ int main () {
 				}
 				else if (retour == TIGRE && !ia_tigre) {
 					plateauAvant = plateau;
-					tigre_deplacement(x_grille, y_grille);
-					gagnant = partie_detection_vainqueur();
+					tigre_deplacement(x_grille, y_grille, &gagnant);
 				}
 			}
 		}
@@ -113,6 +112,7 @@ int main () {
 		affichage();
 	}
 	affichage_gagnant (gagnant);
+	getch();
 	/* Fermeture de Ncurses */
 	endwin();
 	return 0;

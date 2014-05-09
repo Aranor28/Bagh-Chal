@@ -8,16 +8,17 @@
 #include "affichage.h"
 #include "partie.h"
 
-void tigre_deplacement (int x1, int y1) {
+void tigre_deplacement (int x1, int y1, int * gagnant) {
 	affichage_surbrillance (x1, y1);
 
 	int x2, y2, retour_case;
 	while (1) {
 		retour_case = ES_recuperer_action(&x2, &y2);
 		if (retour_case == VIDE) {
-			if (cases_adjacentes(x1, y1, x2, y2)) {
+			if (partie_cases_adjacentes(x1, y1, x2, y2)) {
 				plateau.grille[x1][y1] = VIDE;
 				plateau.grille[x2][y2] = TIGRE;
+				*gagnant = partie_detection_vainqueur();
 				main_joueur_suivant();
 				return;
 			}
@@ -26,6 +27,7 @@ void tigre_deplacement (int x1, int y1) {
 				plateau.grille[x2][y2] = TIGRE;
 				plateau.grille[(x1+x2)/2][(y1+y2)/2] = VIDE; // la chèvre est mangée
 				plateau.nb_chevres_mangees++;
+				*gagnant = partie_detection_vainqueur();
 				main_joueur_suivant();
 				return;
 			}

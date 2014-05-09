@@ -1,10 +1,10 @@
 \board
+GGGGG
+GGTT.
+GG.T.
 GGT..
-T....
-G....
-G....
-T...T
+GGGG.
 \endboard
 \player T
-\phase 1
-\captured 0
+\phase 2
+\captured 5

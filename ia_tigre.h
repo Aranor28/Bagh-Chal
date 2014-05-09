@@ -6,6 +6,6 @@
 
 void ia_tigre_deplacement();
 bool ia_tigre_mange_chevre(int x, int y, int * x2, int * y2);
-bool deplacer_tigre (int x, int y);
+bool ia_deplacer_tigre (int x, int y);
 
 #endif
