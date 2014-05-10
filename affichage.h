@@ -8,22 +8,26 @@
 #define Y_TOUR_JOUEUR 8 	
 
 #define BOUTTON_SAUVEGARDER " SAUVEGARDER "
-#define X_SAUVEGARDER 5
+#define X_SAUVEGARDER 15
 #define Y_SAUVEGARDER 15
 
-#define BOUTTON_CHARGER " CHARGER "
-#define X_CHARGER 5
+#define BOUTTON_CHARGER "   CHARGER   "
+#define X_CHARGER 15
 #define Y_CHARGER 17
 
-#define BOUTTON_ANNULER " ANNULER "
-#define X_ANNULER 5
+#define BOUTTON_ANNULER "   ANNULER   "
+#define X_ANNULER 15
 #define Y_ANNULER 19
+
+#define BOUTTON_QUITTER "   QUITTER   "
+#define X_QUITTER 15
+#define Y_QUITTER 21
 
 #define X_CHAMP_ERREUR 4
 #define Y_CHAMP_ERREUR LINES-1
 
-#define X_LIGNE_INFO 45
-#define Y_LIGNE_INFO 28
+#define X_LIGNE_INFO 2
+#define Y_LIGNE_INFO 30	
 
 #define BOUTTON_JcJ " Joueur contre Joueur "
 #define X_MENU_JcJ 35
@@ -37,11 +41,7 @@
 #define X_MENU_JcIA_TIGRE 35
 #define Y_MENU_JcIA_TIGRE 12
 
-#define BOUTTON_QUITTER " Quitter  "
-#define X_QUITTER 5
-#define Y_QUITTER 23
-
-#define BIENVENUE "Bienvenue sur le jeu du Bagh-Chal ! Sélectionner ce que vous voulez faire :"
+#define BIENVENUE "Bienvenue sur le jeu du Bagh-Chal ! Sélectionnez ce que vous voulez faire :"
 #define X_BIENVENUE 20
 #define Y_BIENVENUE 8
 
@@ -61,12 +61,13 @@
 #define COULEURS_BOUTON_SAUVEGARDE 10
 #define COULEURS_BOUTON_CHARGER 11
 #define COULEURS_BOUTON_ANNULER 12
-#define COULEURS_BOUTON_JcJ 12
-#define COULEURS_BOUTON_JcIA_CHEVRE 13
-#define COULEURS_BOUTON_JcIA_TIGRE 14
-#define COULEURS_BOUTON_QUITTER 15
-#define COULEURS_BIENVENUE 16
-#define COULEURS_AIDE 17
+#define COULEURS_BOUTON_JcJ 13
+#define COULEURS_BOUTON_JcIA_CHEVRE 14
+#define COULEURS_BOUTON_JcIA_TIGRE 15
+#define COULEURS_BOUTON_QUITTER 16
+#define COULEURS_BIENVENUE 17
+#define COULEURS_AIDE 18
+#define COULEURS_INFO 19
 
 void affichage_init_color_pairs ();
 void affichage ();
