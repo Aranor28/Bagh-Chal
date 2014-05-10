@@ -3,6 +3,7 @@
 #include <ncurses.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include "main.h"
 
 #include "affichage.h"
@@ -57,67 +58,60 @@ int main () {
 	affichage_ligne_info("Début de la partie");
 	
 	while (!gagnant){
-		/* l'utilisateur doit pouvoir à partir de maintenant
-		placer une chèvre, quitter, sauvegarder, charger une autre partie.
-		On veut donc tou d'abord récupérer un clic de souris
-		*/
-		retour = ES_recuperer_action(&x_grille, &y_grille); // récupère le type de case cliquée et ses coordonnées sur la grille
+		if ((plateau.joueur_courant == TIGRE && !ia_tigre) || (plateau.joueur_courant == CHEVRE && !ia_chevre)) {
+			// C'est au tour d'un joueur humain
 
-		if (retour == SAUVEGARDER) {
-			sauvegarder_partie();
-			affichage_ligne_info("Sauvegarde effectuée");
-		}
-		else if (retour == CHARGER) {
-			charger_partie(NOM_FICHIER_SAUVEGARDE);
-			affichage_ligne_info("Chargement effectué");
-		}
-		else if (retour == ANNULER) {
-			plateau = plateauAvant;
-		}
-		else if (retour == QUITTER) {
-			sauvegarder_partie();
-			endwin();
-			return 0;
-		}
-		else if (retour == AIDE) {
-			affichage_aide();
-			getch();
-			clear();
-		}
-		else {
-			if (plateau.joueur_courant == CHEVRE) { // Tour des chèvres
-				if (ia_chevre && plateau.phase == PLACEMENT) {
-					ia_chevre_placement();
-					gagnant = partie_detection_vainqueur();
-					main_joueur_suivant();
-				}
-				else if (ia_chevre && plateau.phase == DEPLACEMENT) {
-					ia_chevre_deplacement();
-					gagnant = partie_detection_vainqueur();
-					main_joueur_suivant();
-				}
-				else { // pas ia
-					if (plateau.phase == PLACEMENT && retour == VIDE) {
-						plateauAvant = plateau;
-						chevre_placement(x_grille, y_grille, &gagnant);
-					}
-					else if (plateau.phase == DEPLACEMENT && retour == CHEVRE) {
-						plateauAvant = plateau;
-						chevre_deplacement(x_grille, y_grille, &gagnant);
-					}
-				}
+			retour = ES_recuperer_action(&x_grille, &y_grille); 
+			// On récupère le type de case cliquée et ses coordonnées sur la grille
+
+			if (retour == SAUVEGARDER) {
+				sauvegarder_partie();
+				affichage_ligne_info("Sauvegarde effectuée");
 			}
-			else { // Tour des tigres
-				if (ia_tigre){
-					ia_tigre_deplacement();
-					gagnant = partie_detection_vainqueur();
-					main_joueur_suivant();
+			else if (retour == CHARGER) {
+				charger_partie(NOM_FICHIER_SAUVEGARDE);
+				affichage_ligne_info("Chargement effectué");
+			}
+			else if (retour == ANNULER) {
+				plateau = plateauAvant;
+			}
+			else if (retour == QUITTER) {
+				sauvegarder_partie();
+				endwin();
+				return 0;
+			}
+			else if (retour == AIDE) {
+				affichage_aide();
+				getch();
+				clear();
+			}
+			else {
+				plateauAvant = plateau;
+				if (plateau.joueur_courant == CHEVRE && plateau.phase == PLACEMENT && retour == VIDE) {
+					chevre_placement(x_grille, y_grille, &gagnant);
 				}
-				else if (retour == TIGRE && !ia_tigre) {
-					plateauAvant = plateau;
+				else if (plateau.joueur_courant == CHEVRE && plateau.phase == DEPLACEMENT && retour == CHEVRE) {
+					chevre_deplacement(x_grille, y_grille, &gagnant);
+				}
+				else if (plateau.joueur_courant == TIGRE && retour == TIGRE) { // Tour des tigres
 					tigre_deplacement(x_grille, y_grille, &gagnant);
 				}
 			}
+		}
+		else { // c'est au tour d'un joueur IA
+			sleep(1); // le temps de jeu de l'IA
+
+			if (ia_chevre && plateau.phase == PLACEMENT) { // *** IA ***
+				ia_chevre_placement();
+			}
+			else if (ia_chevre && plateau.phase == DEPLACEMENT) {
+				ia_chevre_deplacement();
+			}
+			else if (ia_tigre) {
+				ia_tigre_deplacement();
+			}
+			gagnant = partie_detection_vainqueur();
+			main_joueur_suivant();
 		}
 
 		if (plateau.nb_chevres_placees == 20) {
@@ -170,10 +164,6 @@ void main_joueur_suivant () {
 		plateau.joueur_courant = TIGRE;
 	else
 		plateau.joueur_courant = CHEVRE;
-}
-
-void main_verifier_extra_cases (int choix) {
-	// servira à vérifier si le joueur a cliqué sur quitter, sauvegarder, chager
 }
 
 void debug (char str[], int n) {

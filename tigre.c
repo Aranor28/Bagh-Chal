@@ -12,7 +12,7 @@ void tigre_deplacement (int x1, int y1, int * gagnant) {
 	affichage_surbrillance (x1, y1);
 
 	int x2, y2, retour_case;
-	while (1) {
+	do {
 		retour_case = ES_recuperer_action(&x2, &y2);
 		if (retour_case == VIDE) {
 			if (partie_cases_adjacentes(x1, y1, x2, y2)) {
@@ -38,7 +38,7 @@ void tigre_deplacement (int x1, int y1, int * gagnant) {
 			affichage_pion();
 			affichage_surbrillance (x1, y1);
 		}
-	}	
+	} while (ES_dans_plateau(retour_case));
 }
 
 bool saute_chevre (int x1, int y1, int x2, int y2) {

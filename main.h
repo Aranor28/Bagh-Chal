@@ -27,6 +27,7 @@
 #define CHARGER 5
 #define ANNULER 6
 #define QUITTER 7
+#define HORS_PLATEAU 9
 
 /* Différentes cases pendent le menu */
 #define JCJ 1

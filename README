@@ -7,5 +7,9 @@ Rest actuellement à faire (07/05)
 	- Gestion des clics pendent le tour d'un joueur (pouvoir quitter, annuler)
 	- Afficher des informations au cours de la partie
 	- Paufiner l'affichage
-	- Ajouter un timer 0.5s pour le tour de l'IA
+
+
+Bug :
+	- Charger une partie contre IA tigre pendent qu'on joue contre IA chevre (et vice et versa)
+		bloque tous les clics
 	

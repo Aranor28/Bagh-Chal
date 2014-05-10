@@ -207,7 +207,6 @@ void affichage_aide () {
 	mvprintw(10,0,"Ce jeu se joue à 2 : un joueur ayant quatre tigres et son adversaire vingt chevres\nL'objectif des chevres est d'immobiliser les tigres.\nLes tigres gagnent s'ils capturent suffisamment de chevres pour que celle-ci ne puissent plus les immobiliser (7 chevres).\nLes joueurs doivent chacun leur tour deplacer un de leur pion. Ce sont les chevres qui commencent.\nChaque pion peut se deplacer d'une intersection vers une autre libre en suivant le trace du diagramme.\nLes chevres rentrent en jeu une a une, sur une intersection libre. Tant que toutes les chevres ne sont pas placees, elles ne peuvent pas se deplacer. \nLes tigres peuvent se deplacer meme si toutes les chevres ne sont pas placees.\nUn tigre capture une chevre en sautant par dessus elle, lorsque l'intersection suivante est libre. Un tigre ne peut manger qu'une chevre par coup.\n*******************************************\nPour placer une chevre, cliquez sur une intersection libre.\nPour déplacer un pion (tigre ou chevre) cliquez sur le pion à deplacer puis cliquez sur l'intersection d'arrivee.\nPour de-selection un pion, cliquez sur un autre.\nPour faire jouer l'ordinateur, cliquez n'importe où sur votre terminal.\n\n CLIQUEZ POUR QUITTER CETTE AIDE.\n");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
 	refresh();
-
 }
 
 void affichage_vider_info () {
