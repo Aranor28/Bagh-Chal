@@ -3,6 +3,7 @@
 #include <ncurses.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include "main.h"
 
 #include "affichage.h"
@@ -64,27 +65,32 @@ int main () {
 		retour = ES_recuperer_action(&x_grille, &y_grille); // récupère le type de case cliquée et ses coordonnées sur la grille
 
 		if (retour == SAUVEGARDER) {
+			affichage_vider_info();
 			sauvegarder_partie();
 			affichage_ligne_info("Sauvegarde effectuée");
 		}
 		else if (retour == CHARGER) {
+			affichage_vider_info();
 			charger_partie(NOM_FICHIER_SAUVEGARDE);
 			affichage_ligne_info("Chargement effectué");
 		}
 		else if (retour == ANNULER) {
+			affichage_vider_info();
 			plateau = plateauAvant;
 		}
 		else if (retour == QUITTER) {
-			sauvegarder_partie();
+			sleep(1);
 			endwin();
 			return 0;
 		}
 		else if (retour == AIDE) {
+			affichage_vider_info();
 			affichage_aide();
 			getch();
 			clear();
 		}
 		else {
+			affichage_vider_info();
 			if (plateau.joueur_courant == CHEVRE) { // Tour des chèvres
 				if (ia_chevre && plateau.phase == PLACEMENT) {
 					ia_chevre_placement();
