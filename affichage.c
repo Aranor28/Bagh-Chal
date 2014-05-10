@@ -21,10 +21,10 @@ void affichage_init_color_pairs () {
 	init_pair(COULEURS_CASE_CHEVRE_SURBRILLANCE, COLOR_WHITE, COLOR_GREEN);
 
 	/* Paires de couleurs des boutons de sauvegarde et chargement */
-	init_pair(COULEURS_BOUTON_SAUVEGARDE, COLOR_WHITE,COLOR_CYAN);
-	init_pair(COULEURS_BOUTON_CHARGER, COLOR_WHITE,COLOR_CYAN);
-	init_pair(COULEURS_BOUTON_ANNULER, COLOR_WHITE,COLOR_CYAN);
-	init_pair(COULEURS_BOUTON_QUITTER, COLOR_WHITE,COLOR_CYAN);
+	init_pair(COULEURS_BOUTON_SAUVEGARDE, COLOR_BLACK,COLOR_CYAN);
+	init_pair(COULEURS_BOUTON_CHARGER, COLOR_BLACK,COLOR_CYAN);
+	init_pair(COULEURS_BOUTON_ANNULER, COLOR_BLACK,COLOR_CYAN);
+	init_pair(COULEURS_BOUTON_QUITTER, COLOR_BLACK,COLOR_CYAN);
 
 	/* Paires de couleurs des boutons du menu */
 	init_pair(COULEURS_BIENVENUE, COLOR_WHITE,COLOR_MAGENTA);
@@ -33,30 +33,33 @@ void affichage_init_color_pairs () {
 	init_pair(COULEURS_BOUTON_JcIA_TIGRE, COLOR_WHITE, COLOR_GREEN);
 
 	/* Paire de couleur de l'aide */
-	init_pair(COULEURS_AIDE, COLOR_RED,COLOR_BLACK);
+	init_pair(COULEURS_AIDE, COLOR_WHITE,COLOR_BLACK);
+
+	/* Paire de couleur des lignes d'informations */ 
+	init_pair(COULEURS_INFO, COLOR_CYAN,COLOR_BLACK);
+
 }
 
 void affichage () {
 
 	affichage_bouttons();
 	affichage_plateau();
-		affichage_info();
+	affichage_info();
 	affichage_pion();
-	affichage_vider_info();
 	refresh();
 }
 
 /****  AFFICHAGE DES INFORMATIONS CONCERNANT LE DEROULEMENT DU JEU ****/
 void affichage_info(){
-	/*Affichage du nombre de chèvres placées*/
+	/* Affichage du nombre de chèvres placées */
 	attron(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_PLACEES));
 	mvprintw(Y_NBCHEVRES, X_NBCHEVRES, "%02d Chevre(s) en réserve"
 		,(20 - plateau.nb_chevres_placees));
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_PLACEES));
 
-	/*Affichage du nombre de chèvres mangées */
+	/* Affichage du nombre de chèvres mangées */
 	attron(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_MANGEES));
-	mvprintw(Y_NBCHEVRES + 1, X_NBCHEVRES, "%01d /7 Chevre(s) mangée(s)\n", plateau.nb_chevres_mangees);
+	mvprintw(Y_NBCHEVRES + 1, X_NBCHEVRES, "%01d /7 Chevre(s) mangée(s)", plateau.nb_chevres_mangees);
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_NBCHEVRES_MANGEES));
 
 	/*Affichage du tour du joueur*/
@@ -100,14 +103,17 @@ void affichage_pion() {
 void affichage_bouttons() {
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_SAUVEGARDE));
 	mvprintw(Y_SAUVEGARDER, X_SAUVEGARDER,"[" BOUTTON_SAUVEGARDER "]");
+	mvprintw(Y_SAUVEGARDER + 1, X_SAUVEGARDER , "               ");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_SAUVEGARDE));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_CHARGER));
 	mvprintw(Y_CHARGER, X_CHARGER,"[" BOUTTON_CHARGER "]");
+	mvprintw(Y_CHARGER + 1, X_CHARGER , "               ");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_CHARGER));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_ANNULER));
 	mvprintw(Y_ANNULER, X_ANNULER,"[" BOUTTON_ANNULER "]");
+	mvprintw(Y_ANNULER + 1, X_ANNULER , "               ");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_ANNULER));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_QUITTER));
@@ -121,6 +127,7 @@ void affichage_bouttons() {
 
 /**** AFFICHAGE DE LA GRILLE DU PLATEAU DE JEU ****/
 void affichage_plateau(){
+
 	/*Affichage de la grille*/
 	mvprintw(STARTY, STARTX, "   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   \n");
 	mvprintw(STARTY+1, STARTX, " | \\  |  / | \\  |  / |\n");
@@ -139,6 +146,7 @@ void affichage_plateau(){
 	mvprintw(STARTY+14, STARTX, " |  / | \\  |  / | \\  |\n");
 	mvprintw(STARTY+15, STARTX, " | /  |  \\ | /  |  \\ |\n");
 	mvprintw(STARTY+16, STARTX, "   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   ");addch(ACS_HLINE);addch(ACS_HLINE);printw("   \n");
+
 }
 
 void affichage_surbrillance (int x, int y) {
@@ -173,8 +181,9 @@ void affichage_gagnant (int gagnant){
 }
 
 void affichage_ligne_info (char s[]) {
+	attron(A_BOLD | COLOR_PAIR(COULEURS_INFO));
 	mvprintw(Y_LIGNE_INFO, X_LIGNE_INFO, "%s", s);
-	refresh();
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
 }
 
 void affichage_menu (){
@@ -203,9 +212,9 @@ void affichage_menu (){
 
 void affichage_aide () {
 	clear();
-	attron(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+	attron(COLOR_PAIR(COULEURS_AIDE));
 	mvprintw(10,0,"Ce jeu se joue à 2 : un joueur ayant quatre tigres et son adversaire vingt chevres\nL'objectif des chevres est d'immobiliser les tigres.\nLes tigres gagnent s'ils capturent suffisamment de chevres pour que celle-ci ne puissent plus les immobiliser (7 chevres).\nLes joueurs doivent chacun leur tour deplacer un de leur pion. Ce sont les chevres qui commencent.\nChaque pion peut se deplacer d'une intersection vers une autre libre en suivant le trace du diagramme.\nLes chevres rentrent en jeu une a une, sur une intersection libre. Tant que toutes les chevres ne sont pas placees, elles ne peuvent pas se deplacer. \nLes tigres peuvent se deplacer meme si toutes les chevres ne sont pas placees.\nUn tigre capture une chevre en sautant par dessus elle, lorsque l'intersection suivante est libre. Un tigre ne peut manger qu'une chevre par coup.\n*******************************************\nPour placer une chevre, cliquez sur une intersection libre.\nPour déplacer un pion (tigre ou chevre) cliquez sur le pion à deplacer puis cliquez sur l'intersection d'arrivee.\nPour de-selection un pion, cliquez sur un autre.\nPour faire jouer l'ordinateur, cliquez n'importe où sur votre terminal.\n\n CLIQUEZ POUR QUITTER CETTE AIDE.\n");
-	attroff(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+	attroff( COLOR_PAIR(COULEURS_AIDE));
 	refresh();
 }
 

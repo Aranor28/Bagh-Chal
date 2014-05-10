@@ -64,6 +64,7 @@ int main () {
 			retour = ES_recuperer_action(&x_grille, &y_grille); 
 			// On récupère le type de case cliquée et ses coordonnées sur la grille
 
+			affichage_vider_info();
 			if (retour == SAUVEGARDER) {
 				sauvegarder_partie();
 				affichage_ligne_info("Sauvegarde effectuée");
@@ -76,7 +77,7 @@ int main () {
 				plateau = plateauAvant;
 			}
 			else if (retour == QUITTER) {
-				sauvegarder_partie();
+				sleep(1);
 				endwin();
 				return 0;
 			}
