@@ -26,6 +26,10 @@ int ES_recuperer_action (int * x_grille, int * y_grille) {
 			// Si on a appuyé sur charger
 			return(QUITTER);
 		}
+		else if (y_win == Y_MENU_AIDE && x_win >= X_MENU_AIDE && x_win <= (X_MENU_AIDE + strlen(BOUTON_AFFICHER_AIDE))){
+			//Si on veut afficher l'aide
+			return(AIDE);
+		}
 		else {
 			// N'importe où ailleur
 			return(PAS_CASE);
@@ -52,6 +56,9 @@ int ES_recuperer_choix_menu() {
 	}
 	else if (y_win == Y_MENU_JcIA_CHEVRE && x_win >= X_MENU_JcIA_CHEVRE && x_win <= (X_MENU_JcIA_CHEVRE + strlen(BOUTTON_JcIA_CHEVRE))) {
 		return(IA_CHEVRE);
+	}
+	else if (y_win == Y_MENU_AIDE && x_win >= X_MENU_AIDE && x_win <= (X_MENU_AIDE + strlen(BOUTON_AFFICHER_AIDE))){
+		return(AIDE);
 	}
 	else {
 		return(VIDE);

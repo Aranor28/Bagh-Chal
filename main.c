@@ -41,6 +41,12 @@ int main () {
 		case IA_CHEVRE:
 			ia_chevre = true;
 			break;
+		case AIDE:
+			affichage_aide ();
+			getch();
+			clear();
+			/* Revenir a l'affichage du menu ? */
+			break;
 	}
 	clear(); 
 	affichage();
@@ -69,6 +75,12 @@ int main () {
 			sauvegarder_partie();
 			endwin();
 			return 0;
+		}
+		else if (retour == AIDE) {
+			affichage_aide();
+			getch();
+			clear();
+			// SOUCIS ICI IL N'AFFICHE PAS L'AIDE par contre il affiche "sauvegarde effectuée"
 		}
 		else {
 			if (plateau.joueur_courant == CHEVRE) { // Tour des chèvres

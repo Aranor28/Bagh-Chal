@@ -1,8 +1,8 @@
 #ifndef AFFICHAGE_H
 #define AFFICHAGE_H
 
-#define X_NBCHEVRES 45
-#define Y_NBCHEVRES 5
+#define X_NBCHEVRES 90
+#define Y_NBCHEVRES 15
 
 #define X_TOUR_JOUEUR 45
 #define Y_TOUR_JOUEUR 8 	
@@ -41,6 +41,14 @@
 #define X_QUITTER 5
 #define Y_QUITTER 23
 
+#define BIENVENUE "Bienvenue sur le jeu du Bagh-Chal ! Sélectionner ce que vous voulez faire :"
+#define X_BIENVENUE 20
+#define Y_BIENVENUE 8
+
+#define BOUTON_AFFICHER_AIDE "Afficher l'aide"
+#define X_MENU_AIDE 100
+#define Y_MENU_AIDE 1
+
 #define COULEURS_NBCHEVRES_PLACEES 1
 #define COULEURS_NBCHEVRES_MANGEES 2
 #define COULEURS_TOUR_TIGRE 3
@@ -57,6 +65,8 @@
 #define COULEURS_BOUTON_JcIA_CHEVRE 13
 #define COULEURS_BOUTON_JcIA_TIGRE 14
 #define COULEURS_BOUTON_QUITTER 15
+#define COULEURS_BIENVENUE 16
+#define COULEURS_AIDE 17
 
 void affichage_init_color_pairs ();
 void affichage ();
@@ -69,5 +79,6 @@ void affichage_gagnant (int gagnant);
 void affichage_ligne_info (char s[]);
 void affichage_menu ();
 void affichage_vider_info ();
+void affichage_aide ();
 
 #endif
