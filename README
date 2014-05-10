@@ -3,10 +3,9 @@ Projet Bagh Chal
 Par doudou et doudou
 
 Rest actuellement à faire (07/05)
-	- Ia
-	- Gesition des clics pour le menu de début de partie
+	- Ia (améliorer ?)
 	- Gestion des clics pendent le tour d'un joueur (pouvoir quitter, annuler)
-	- Ajouter boutton pour quitter
 	- Afficher des informations au cours de la partie
-	- Historique des coups
-	- Annulation du dèrnier coup
+	- Paufiner l'affichage
+	- Ajouter un timer 0.5s pour le tour de l'IA
+	

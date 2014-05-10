@@ -24,30 +24,33 @@ int main () {
 	main_initialisation();
 	PlateauBC plateauAvant = plateau;
 
-	affichage_menu ();
 	do {
+		affichage_menu ();
 		retour = ES_recuperer_choix_menu();
-	} while(retour == VIDE);
 
-	switch(retour) {
-		case JCJ:
-			// rien à faire, les ia sont déjà à false
-			break;
+		switch(retour) {
+			case JCJ:
+				// rien à faire, les ia sont déjà à false
+				break;
 
-		case IA_TIGRE:
-			ia_tigre = true;
-			break;
+			case IA_TIGRE:
+				ia_tigre = true;
+				break;
 
-		case IA_CHEVRE:
-			ia_chevre = true;
-			break;
-		case AIDE:
-			affichage_aide ();
-			getch();
-			clear();
-			/* Revenir a l'affichage du menu ? */
-			break;
-	}
+			case IA_CHEVRE:
+				ia_chevre = true;
+				break;
+				
+			case AIDE:
+				affichage_aide ();
+				getch();
+				clear();
+				/* Revenir a l'affichage du menu ? */
+				break;
+		}
+	} while(retour == VIDE || retour == AIDE);
+
+
 	clear(); 
 	affichage();
 	// pour tester
@@ -80,7 +83,6 @@ int main () {
 			affichage_aide();
 			getch();
 			clear();
-			// SOUCIS ICI IL N'AFFICHE PAS L'AIDE par contre il affiche "sauvegarde effectuée"
 		}
 		else {
 			if (plateau.joueur_courant == CHEVRE) { // Tour des chèvres

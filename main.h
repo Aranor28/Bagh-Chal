@@ -32,7 +32,7 @@
 #define JCJ 1
 #define IA_TIGRE 2
 #define IA_CHEVRE 3
-#define AIDE 4
+#define AIDE 8
 
 /* DEFINITION DU PLATEAU */
 typedef struct et_plateauBC {

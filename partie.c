@@ -18,10 +18,9 @@ bool partie_cases_adjacentes (int x1, int y1, int x2, int y2) {
 
 int partie_detection_vainqueur () {
 	if (plateau.joueur_courant == TIGRE) {
-		debug("ici", 0);
 		if (plateau.nb_chevres_mangees >= 7)
 			return(TIGRE);
-		else if (partie_chevres_bloquees())
+		else if (plateau.phase != PLACEMENT && partie_chevres_bloquees())
 			return(CHEVRE);
 		else
 			return(VIDE);
