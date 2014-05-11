@@ -17,9 +17,6 @@ void ia_chevre_placement () {
 			}
 		}
 	}
-	/* Si aucun emplacement "sûr" n'à été trouvé 
-	 * On reboucle et on prend le premier disponible.
-	 * Moin coûteux que de mémoriser la première position disponible ??? */
 	for (i=0; i< 5 ;i++){
 		for (j=0 ; j < 5 ; j++){
 			if (plateau.grille[i][j] == VIDE) {

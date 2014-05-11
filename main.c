@@ -1,39 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ncurses.h>
-#include <assert.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include "main.h"
 
+#include "main.h"
 #include "affichage.h"
+#include "entree_souris.h"
+#include "partie.h"
 #include "tigre.h"
 #include "chevre.h"
-#include "partie.h"
-#include "entree_souris.h"
 #include "sauvegarde.h"
 #include "chargement.h"
 #include "ia_tigre.h"
 #include "ia_chevre.h"
 
 int main () {
-	int gagnant = VIDE; // == 0
 	int x_grille, y_grille;
+	int gagnant = VIDE; // == 0
 	int retour = VIDE;
-	bool ia_chevre = false, ia_tigre = false;
+	bool ia_chevre = false;
+	bool ia_tigre = false;
 
 	main_initialisation();
-	PlateauBC plateauAvant = plateau;
+	PlateauBC plateauAvant = plateau; // servira pour annuler le dèrnier coup joué
 
+	/* Première boucle, affiche le menu et récupère le choix du type de partie */
 	do {
 		affichage_menu ();
 		retour = ES_recuperer_choix_menu();
 
 		switch(retour) {
-			case JCJ:
-				// rien à faire, les ia sont déjà à false
-				break;
-
+			/* rien à faire dans le cas joueur contre joueur, les booléens des ia sont déjà à false */
 			case IA_TIGRE:
 				ia_tigre = true;
 				break;
@@ -43,10 +41,9 @@ int main () {
 				break;
 				
 			case AIDE:
-				affichage_aide ();
+				affichage_aide();
 				getch();
 				clear();
-				/* Revenir a l'affichage du menu ? */
 				break;
 		}
 	} while(retour == VIDE || retour == AIDE);
@@ -56,12 +53,13 @@ int main () {
 	affichage_ligne_info("Début de la partie");
 	refresh();
 	
+	/* Boucle principale du programme */
 	while (!gagnant) {
+		/* Si c'est au tour d'un joueur humain */
 		if ((plateau.joueur_courant == TIGRE && !ia_tigre) || (plateau.joueur_courant == CHEVRE && !ia_chevre)) {
-			// C'est au tour d'un joueur humain
-
+			
+			/* On récupère le type de case cliquée et ses coordonnées sur la grille */
 			retour = ES_recuperer_action(&x_grille, &y_grille); 
-			// On récupère le type de case cliquée et ses coordonnées sur la grille
 
 			affichage_vider_info();
 			if (retour == SAUVEGARDER) {
@@ -73,6 +71,7 @@ int main () {
 				affichage_ligne_info("Chargement effectué");
 			}
 			else if (retour == ANNULER) {
+				/* On rétablit le plateau à l'état qu'il était au tour précédent (de joueur humain) */
 				plateau = plateauAvant;
 			}
 			else if (retour == QUITTER) {
@@ -84,7 +83,7 @@ int main () {
 				getch();
 				clear();
 			}
-			else {
+			else { // On gère les cas de jeu sur la grille
 				if (plateau.joueur_courant == CHEVRE && plateau.phase == PLACEMENT && retour == VIDE) {
 					chevre_placement(x_grille, y_grille, &gagnant, &plateauAvant);
 				}
@@ -98,9 +97,9 @@ int main () {
 			}
 		}
 		else { // c'est au tour d'un joueur IA
-			sleep(1); // le temps de jeu de l'IA
+			sleep(1); // le temps de jeu de l'IA, délai de une seconde
 
-			if (ia_chevre && plateau.phase == PLACEMENT) { // *** IA ***
+			if (ia_chevre && plateau.phase == PLACEMENT) {
 				ia_chevre_placement();
 			}
 			else if (ia_chevre && plateau.phase == DEPLACEMENT) {
@@ -109,6 +108,9 @@ int main () {
 			else if (ia_tigre) {
 				ia_tigre_deplacement();
 			}
+			/* À l'inverse du tour d'un joueur humain, le fonction de jeu de l'ia
+			 * ne modifient pas la variable gagnant et ne passent pas au tour suivant,
+			 * on le fait à la suite */
 			gagnant = partie_detection_vainqueur();
 			main_joueur_suivant();
 		}
@@ -120,7 +122,6 @@ int main () {
 	}
 	affichage_gagnant (gagnant);
 	getch();
-	/* Fermeture de Ncurses */
 	endwin();
 	return 0;
 }
@@ -133,9 +134,9 @@ void main_initialisation () {
 	plateau.phase = PLACEMENT;
 
 	/* Initialisation de la grille
-	* Place les tigres dans les angles et met à VIDE
-	* les autres cases */
-	int i,j;
+	 * Place les tigres dans les angles et met à VIDE
+	 * les autres cases */
+	int i, j;
 	for (i=0; i < 5; i++) {
 		for (j=0; j < 5; j++) {
 			plateau.grille[i][j] = VIDE;
@@ -163,9 +164,4 @@ void main_joueur_suivant () {
 		plateau.joueur_courant = TIGRE;
 	else
 		plateau.joueur_courant = CHEVRE;
-}
-
-void debug (char str[], int n) {
-	mvprintw(Y_CHAMP_ERREUR, X_CHAMP_ERREUR, "debug: %s [%d]", str, n);
-	refresh();
 }

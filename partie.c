@@ -5,10 +5,11 @@
 #include "main.h"
 
 bool partie_cases_adjacentes (int x1, int y1, int x2, int y2) {
-	if ((abs(x1-x2) == 1 && abs(y1-y2) == 0) || (abs(x1-x2) == 0 && abs(y1-y2) == 1)) {// si déplacement "carré" de 1
+	/* Si le déplacement entre les deux cases est "carré" et de distance 1 */
+	if ((abs(x1-x2) == 1 && abs(y1-y2) == 0) || (abs(x1-x2) == 0 && abs(y1-y2) == 1)) {
 		return true;
 	}
-	else if ((x1 + y1) % 2 == 0) { // si la case de départ a accès aux diagonales de la grille
+	else if ((x1 + y1) % 2 == 0) { // si la case de départ (x1, y1) a accès aux diagonales de la grille
 		if (abs(x1-x2) == 1 && abs(y1-y2) == 1) {
 			return true;
 		}
@@ -20,13 +21,16 @@ int partie_detection_vainqueur () {
 	if (plateau.joueur_courant == TIGRE) {
 		if (plateau.nb_chevres_mangees >= 7)
 			return(TIGRE);
-		else if (plateau.phase != PLACEMENT && partie_chevres_bloquees())
+		else if (plateau.phase != PLACEMENT && partie_chevres_bloquees()) {
+			/* Vérification du rare cas où toutes les chèvres sont bloquées */
 			return(CHEVRE);
+		}
 		else
 			return(VIDE);
 	}
 	else { // joueur_courant == CHEVRE
 		int cpt_tigres_bloques = 0;
+		/* On compte le nombre de tigres bloqués */
 		for (int j=0; j < 5; j++) {
 			for (int i=0; i < 5; i++) {
 				if (plateau.grille[i][j] == TIGRE && partie_tigre_bloque(i, j)) {
@@ -52,7 +56,7 @@ bool partie_tigre_bloque (int x, int y) {
 	for (i = x1; i <= x2; i++) {
 		for (j = y1; j <= y2; j++) {
 			if (i != x || j != y) { // si on est pas sur la case centrale
-				if (acces_diag || i == x || j == y) { // si on a accès aux diagonales où qu'on est pas sur une diag
+				if (acces_diag || i == x || j == y) { // si on a accès aux diagonales où qu'on est pas sur une diagonale
 					if (plateau.grille[i][j] == VIDE) {
 						return(false);
 					}
@@ -75,8 +79,8 @@ bool partie_prolongation_vide (int x1, int y1, int x2, int y2) {
 bool partie_chevres_bloquees () {
 	int i, j, temp1, temp2;
 
-	for (i=0; i< 5 ;i++){
-		for (j=0 ; j < 5 ; j++){
+	for (i=0; i< 5 ;i++) {
+		for (j=0 ; j < 5 ; j++) {
 			/* On choisi de parcourir les cases vides plutot que les chèvres 
 			 * car si les chèvres sont bloquées il y a surement plus de chèvres
 			 * que de cases vides */

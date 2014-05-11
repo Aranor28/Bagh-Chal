@@ -47,7 +47,6 @@ typedef struct et_plateauBC {
 /* Prototypes */
 void main_initialisation ();
 void main_joueur_suivant ();
-void debug (char str[], int n);
 
 /* Déclaration de la variable globale */
 PlateauBC plateau;

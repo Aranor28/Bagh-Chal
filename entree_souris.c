@@ -1,15 +1,17 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <string.h>
+
 #include "entree_souris.h"
-#include "affichage.h"
 #include "main.h"
+#include "affichage.h"
 
 int ES_recuperer_action (int * x_grille, int * y_grille) {
 	int x_win, y_win;
 	ES_recuperer_entree (&x_win, &y_win);
 
-	if (y_win < STARTY || y_win > (STARTY + HEIGHT) || x_win < STARTX || x_win > (STARTX + WIDTH)) { // si hors de la grille
+	/* Si le clic est hors de la grille */
+	if (y_win < STARTY || y_win > (STARTY + HEIGHT) || x_win < STARTX || x_win > (STARTX + WIDTH)) {
 		if (y_win == Y_SAUVEGARDER && x_win >= X_SAUVEGARDER && x_win <= (X_SAUVEGARDER + strlen(BOUTTON_SAUVEGARDER))) {
 			// Si on a appuyé sur sauvegarder
 			return(SAUVEGARDER);
@@ -35,13 +37,14 @@ int ES_recuperer_action (int * x_grille, int * y_grille) {
 			return(HORS_PLATEAU);
 		}
 	}
-
-	if ((y_win-STARTY) % 4 != 0 || (x_win-STARTX) % 5 > 2) // si dans la grille mais pas une case
+	else if ((y_win-STARTY) % 4 != 0 || (x_win-STARTX) % 5 > 2) // si dans la grille mais pas une case
 		return(PAS_CASE);
-
-	*x_grille = (x_win-STARTX) / 5;
-	*y_grille = (y_win-STARTY) / 4;
-	return(plateau.grille[*x_grille][*y_grille]);
+	else {
+		// on a cliqué sur une case de la grille, on renvoi son type (CHEVRE, TIGRE ou VIDE)
+		*x_grille = (x_win-STARTX) / 5;
+		*y_grille = (y_win-STARTY) / 4;
+		return(plateau.grille[*x_grille][*y_grille]);
+	}
 }
 
 int ES_recuperer_choix_menu() {
@@ -64,7 +67,7 @@ int ES_recuperer_choix_menu() {
 		return(VIDE);
 	}
 }
-
+	
 void ES_recuperer_entree (int * x_win, int * y_win) {
 	int c;
 	MEVENT event; // récupèrera l'évènement
@@ -72,27 +75,13 @@ void ES_recuperer_entree (int * x_win, int * y_win) {
 	mousemask(ALL_MOUSE_EVENTS, NULL); // permet de récupérer tous les évènements de la souris
 
 	while(1) {
-		c = getch(); // récupère une entrée 
-		switch(c) {
-			case KEY_MOUSE:
-				if (getmouse(&event) == OK) {
-					if (event.bstate & BUTTON1_CLICKED) { // si le bouton gauche a été préssé
-						*x_win = event.x;
-						*y_win = event.y;
-						return;
-					}
-				}
-				break;
-
-			case 'q':
-				endwin();
-				exit(0);
-				break;
-
-			default:
-				mvprintw(LINES-1,0, "pas un clic de souris");
-				refresh();
-				break;
+		c = getch(); // récupère une entrée
+		if (c == KEY_MOUSE && getmouse(&event) == OK) {
+			if (event.bstate & BUTTON1_CLICKED) { // si le bouton gauche a été préssé
+				*x_win = event.x;
+				*y_win = event.y;
+				return;
+			}
 		}
 	}
 }
