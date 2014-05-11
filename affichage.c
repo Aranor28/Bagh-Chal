@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ncurses.h>
+
 #include "affichage.h"
 #include "main.h"
 

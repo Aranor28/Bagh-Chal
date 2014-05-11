@@ -4,8 +4,8 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include "main.h"
 
+#include "main.h"
 #include "affichage.h"
 #include "tigre.h"
 #include "chevre.h"
