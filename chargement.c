@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-#include "main.h"
-#include "chargement.h"
 
-// a modifier pour récupérer le nombre de chevres qu'il reste à placer si phase placement
+#include "chargement.h"
+#include "main.h"
 
 int charger_partie (char * nomFich) {
 	int i, j;

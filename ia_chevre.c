@@ -1,10 +1,11 @@
 #include <stdbool.h>
-#include "main.h"
-#include "tigre.h"
-#include "ia_chevre.h"
 #include <stdio.h>
 #include <ncurses.h>
+
+#include "ia_chevre.h"
+#include "main.h"
 #include "partie.h"
+#include "tigre.h"
 
 void ia_chevre_placement () {
 	int i,j;
@@ -17,6 +18,8 @@ void ia_chevre_placement () {
 			}
 		}
 	}
+	/* Si aucun emplacement "sûr" n'à été trouvé 
+	 * On reboucle et on prend le premier disponible.*/
 	for (i=0; i< 5 ;i++){
 		for (j=0 ; j < 5 ; j++){
 			if (plateau.grille[i][j] == VIDE) {
@@ -54,9 +57,6 @@ void ia_chevre_deplacement () {
 						}
 					}
 				}
-				// la chèvre ne peut pas se déplacer et être en sécurité
-				// On apelle une autre chèvre à la rescousse ?
-				// a continuer
 			}
 		}
 	}
