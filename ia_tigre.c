@@ -4,6 +4,7 @@
 
 #include "ia_tigre.h"
 #include "main.h"
+#include "affichage.h"
 
 void ia_tigre_deplacement(){
 	int i, j, x_final, y_final;
@@ -14,6 +15,7 @@ void ia_tigre_deplacement(){
 				plateau.grille[(i+x_final)/2][(j+y_final)/2] = VIDE; // la chèvre est mangée
 				plateau.grille[x_final][y_final] = TIGRE;
 				plateau.nb_chevres_mangees++;
+				affichage_ligne_info("Chèvre mangée !");
 				return;
 			}
 		}

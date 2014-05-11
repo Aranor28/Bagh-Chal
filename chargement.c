@@ -88,6 +88,9 @@ int charger_partie (char * nomFich) {
 	if (plateau.phase == 1) {
 		plateau.nb_chevres_placees = cpt_chevres + plateau.nb_chevres_mangees;
 	}
+	else {
+		plateau.nb_chevres_placees = 20;
+	}
 	return (0);
 }
 

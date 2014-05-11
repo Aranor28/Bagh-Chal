@@ -38,5 +38,8 @@ void chevre_deplacement (int x1, int y1, int * gagnant, PlateauBC * plateauAvant
 			affichage_pion();
 			affichage_surbrillance (x1, y1);
 		}
+		else {
+			affichage_ligne_info("Ce déplacement n'est pas permis.");
+		}
 	}	
 }

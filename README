@@ -2,14 +2,6 @@ Projet Bagh Chal
 
 Par doudou et doudou
 
-Rest actuellement à faire (07/05)
-	- Ia (améliorer ?)
-	- Gestion des clics pendent le tour d'un joueur (pouvoir quitter, annuler)
+Rest actuellement à faire (11/05)
 	- Afficher des informations au cours de la partie
-	- Paufiner l'affichage
-
-
-Bug :
-	- Charger une partie contre IA tigre pendent qu'on joue contre IA chevre (et vice et versa)
-		bloque tous les clics
 	

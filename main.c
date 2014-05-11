@@ -67,6 +67,7 @@ int main () {
 				affichage_ligne_info("Sauvegarde effectuée");
 			}
 			else if (retour == CHARGER) {
+				plateauAvant = plateau; // On peut ainsi revenir en arrière si le chargement était une erreur
 				charger_partie(NOM_FICHIER_SAUVEGARDE);
 				affichage_ligne_info("Chargement effectué");
 			}
