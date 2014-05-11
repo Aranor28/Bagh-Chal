@@ -69,11 +69,11 @@ int main () {
 			else if (retour == CHARGER) {
 				plateauAvant = plateau; // On peut ainsi revenir en arrière si le chargement était une erreur
 				charger_partie(NOM_FICHIER_SAUVEGARDE);
-				affichage_ligne_info("Chargement effectué");
 			}
 			else if (retour == ANNULER) {
 				/* On rétablit le plateau à l'état qu'il était au tour précédent (de joueur humain) */
 				plateau = plateauAvant;
+				affichage_ligne_info("Annulation de la dèrnière action");
 			}
 			else if (retour == QUITTER) {
 				endwin();
