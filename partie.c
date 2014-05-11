@@ -27,8 +27,8 @@ int partie_detection_vainqueur () {
 	}
 	else { // joueur_courant == CHEVRE
 		int cpt_tigres_bloques = 0;
-		for (int j=0; j < NB_CASES_Y; j++) {
-			for (int i=0; i < NB_CASES_X; i++) {
+		for (int j=0; j < 5; j++) {
+			for (int i=0; i < 5; i++) {
 				if (plateau.grille[i][j] == TIGRE && partie_tigre_bloque(i, j)) {
 					cpt_tigres_bloques++;
 				}
@@ -75,8 +75,8 @@ bool partie_prolongation_vide (int x1, int y1, int x2, int y2) {
 bool partie_chevres_bloquees () {
 	int i, j, temp1, temp2;
 
-	for (i=0; i< NB_CASES_X ;i++){
-		for (j=0 ; j < NB_CASES_Y ; j++){
+	for (i=0; i< 5 ;i++){
+		for (j=0 ; j < 5 ; j++){
 			/* On choisi de parcourir les cases vides plutot que les chèvres 
 			 * car si les chèvres sont bloquées il y a surement plus de chèvres
 			 * que de cases vides */

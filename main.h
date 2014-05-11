@@ -5,8 +5,8 @@
 
 #define WIDTH 22    /* LARGEUR DU PLATEAU */
 #define HEIGHT 16    /* LONGUEUR DU PLATEAU */
-#define NB_CASES_X 5
-#define NB_CASES_Y 5
+// #define 5 5
+// #define 5 5
 
 #define STARTX 50  /*Position a laquelle va commencer l'affichage en x*/
 #define STARTY 10   /*Position a laquelle va commencer l'affichage en y*/
@@ -37,7 +37,7 @@
 
 /* DEFINITION DU PLATEAU */
 typedef struct et_plateauBC {
-	int grille [NB_CASES_X][NB_CASES_Y];
+	int grille [5][5];
 	int nb_chevres_placees;
 	int nb_chevres_mangees;
 	int joueur_courant;

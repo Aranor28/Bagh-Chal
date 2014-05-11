@@ -98,5 +98,5 @@ void ES_recuperer_entree (int * x_win, int * y_win) {
 }
 
 bool ES_dans_plateau (int type) {
-	return(type == TIGRE || type == CHEVRE || type == PAS_CASE);
+	return(type == TIGRE || type == CHEVRE || type == PAS_CASE || type == VIDE);
 }

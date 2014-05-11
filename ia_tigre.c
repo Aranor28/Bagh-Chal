@@ -6,8 +6,8 @@
 
 void ia_tigre_deplacement(){
 	int i, j, x_final, y_final;
-	for (i=0; i< NB_CASES_X ;i++) {
-		for (j=0 ; j < NB_CASES_Y ; j++) {
+	for (i=0; i< 5 ;i++) {
+		for (j=0 ; j < 5 ; j++) {
 			if (plateau.grille[i][j] == TIGRE && ia_tigre_mange_chevre(i, j, &x_final, &y_final)) {
 				plateau.grille[i][j] = VIDE;
 				// pas très joli mais je voulais que la chèvre soit mangée ici et pas dans l'autre fonction
@@ -20,8 +20,8 @@ void ia_tigre_deplacement(){
 	}
 	// Aucune chèvre n'est mangeable
 	while (true) {
-		for (i=0; i< NB_CASES_X ;i++) {
-			for (j=0 ; j < NB_CASES_Y ; j++) {
+		for (i=0; i< 5 ;i++) {
+			for (j=0 ; j < 5 ; j++) {
 				if (plateau.grille[i][j] == TIGRE && ia_deplacer_tigre(i,j))
 					return;
 			}

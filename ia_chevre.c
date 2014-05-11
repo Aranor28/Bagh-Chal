@@ -8,8 +8,8 @@
 
 void ia_chevre_placement () {
 	int i,j;
-	for (i=0; i< NB_CASES_X ;i++){
-		for (j=0 ; j < NB_CASES_Y ; j++){
+	for (i=0; i< 5 ;i++){
+		for (j=0 ; j < 5 ; j++){
 			if (plateau.grille[i][j] == VIDE && !ia_chevre_en_danger(i,j)) {
 				plateau.grille[i][j] = CHEVRE;
 				plateau.nb_chevres_placees++;
@@ -20,8 +20,8 @@ void ia_chevre_placement () {
 	/* Si aucun emplacement "sûr" n'à été trouvé 
 	 * On reboucle et on prend le premier disponible.
 	 * Moin coûteux que de mémoriser la première position disponible ??? */
-	for (i=0; i< NB_CASES_X ;i++){
-		for (j=0 ; j < NB_CASES_Y ; j++){
+	for (i=0; i< 5 ;i++){
+		for (j=0 ; j < 5 ; j++){
 			if (plateau.grille[i][j] == VIDE) {
 				plateau.grille[i][j] = CHEVRE;
 				plateau.nb_chevres_placees++;
@@ -37,8 +37,8 @@ void ia_chevre_deplacement () {
 	int depart_x, depart_y, fin_x, fin_y;
 	bool acces_diag;
 
-	for (i=0; i< NB_CASES_X ;i++){
-		for (j=0 ; j < NB_CASES_Y ; j++){
+	for (i=0; i< 5 ;i++){
+		for (j=0 ; j < 5 ; j++){
 			if (plateau.grille[i][j] == CHEVRE && ia_chevre_en_danger(i,j)) {
 				acces_diag = ((i + j) % 2 == 0);
 				depart_x = (i == 0) ? 0 : i-1;
@@ -64,8 +64,8 @@ void ia_chevre_deplacement () {
 		}
 	}
 	// On déplace la première chèvre trouvée dans la première case trouvée disponible...
-	for (i=0; i< NB_CASES_X ;i++){
-		for (j=0 ; j < NB_CASES_Y ; j++){
+	for (i=0; i< 5 ;i++){
+		for (j=0 ; j < 5 ; j++){
 			if (plateau.grille[i][j] == CHEVRE && partie_pion_adjacent(i, j, VIDE, &x, &y)) {
 				plateau.grille[i][j] = VIDE;
 				plateau.grille[x][y] = CHEVRE;

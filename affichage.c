@@ -79,8 +79,8 @@ void affichage_info(){
 void affichage_pion() {
 	int i, j;
 	/* On parcourt chaque case de la grille */
-	for (i=0; i< NB_CASES_X; i++) {
-		for (j=0; j < NB_CASES_Y; j++) {
+	for (i=0; i< 5; i++) {
+		for (j=0; j < 5; j++) {
 			if (plateau.grille[i][j] == VIDE) { /* Si la case est vide, on y laisse un espace */
 				attron(A_BOLD | COLOR_PAIR(COULEURS_CASE_VIDE));
 				mvprintw(j*4 + STARTY, i*5 + STARTX,"[ ]");

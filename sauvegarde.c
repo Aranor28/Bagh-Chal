@@ -17,8 +17,8 @@ void sauvegarder_partie () {
 		return;
 	}
 	fprintf(fich, "\\board\n");
-	for (j = 0; j < NB_CASES_Y; j++){
-		for (i = 0; i < NB_CASES_X; i++)	{
+	for (j = 0; j < 5; j++){
+		for (i = 0; i < 5; i++)	{
 			if (plateau.grille[i][j] == TIGRE)
 				fprintf(fich,"T");
 			else if (plateau.grille[i][j] == CHEVRE)

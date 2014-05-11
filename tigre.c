@@ -8,7 +8,7 @@
 #include "affichage.h"
 #include "partie.h"
 
-void tigre_deplacement (int x1, int y1, int * gagnant) {
+void tigre_deplacement (int x1, int y1, int * gagnant, PlateauBC * plateauAvant) {
 	affichage_surbrillance (x1, y1);
 
 	int x2, y2, retour_case;
@@ -16,6 +16,7 @@ void tigre_deplacement (int x1, int y1, int * gagnant) {
 		retour_case = ES_recuperer_action(&x2, &y2);
 		if (retour_case == VIDE) {
 			if (partie_cases_adjacentes(x1, y1, x2, y2)) {
+				*plateauAvant = plateau;
 				plateau.grille[x1][y1] = VIDE;
 				plateau.grille[x2][y2] = TIGRE;
 				*gagnant = partie_detection_vainqueur();
@@ -23,6 +24,7 @@ void tigre_deplacement (int x1, int y1, int * gagnant) {
 				return;
 			}
 			else if (saute_chevre(x1, y1, x2, y2)) {
+				*plateauAvant = plateau;
 				plateau.grille[x1][y1] = VIDE;
 				plateau.grille[x2][y2] = TIGRE;
 				plateau.grille[(x1+x2)/2][(y1+y2)/2] = VIDE; // la chèvre est mangée
@@ -30,6 +32,9 @@ void tigre_deplacement (int x1, int y1, int * gagnant) {
 				*gagnant = partie_detection_vainqueur();
 				main_joueur_suivant();
 				return;
+			}
+			else {
+				affichage_ligne_info("Ce déplacement n'est pas permis.");
 			}
 		}
 		else if (retour_case == TIGRE && (x2 != x1 || y2 != y1)) {

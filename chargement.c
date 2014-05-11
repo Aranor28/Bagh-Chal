@@ -23,9 +23,9 @@ int charger_partie (char * nomFich) {
 	}
 
 	int cpt_chevres = 0;
-	for (j = 0; j < NB_CASES_Y; j++) {
+	for (j = 0; j < 5; j++) {
 		fscanf(fich, "%s", chaine);
-		for (i = 0; i < NB_CASES_X; i++) {
+		for (i = 0; i < 5; i++) {
 			if ( chaine[i] == 'T')
 				plateau.grille[i][j] = TIGRE;
 			else if (chaine[i] == 'G') {
@@ -86,6 +86,7 @@ int charger_partie (char * nomFich) {
 		fprintf(stderr, "Erreur de fichier sur le nombre de chevres capturées\n");
 		return (1);
 	}
+	fclose(fich);
 
 	if (plateau.phase == 1) {
 		plateau.nb_chevres_placees = cpt_chevres + plateau.nb_chevres_mangees;

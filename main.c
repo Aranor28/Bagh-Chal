@@ -51,13 +51,12 @@ int main () {
 		}
 	} while(retour == VIDE || retour == AIDE);
 
-
 	clear(); 
 	affichage();
-	// pour tester
 	affichage_ligne_info("Début de la partie");
+	refresh();
 	
-	while (!gagnant){
+	while (!gagnant) {
 		if ((plateau.joueur_courant == TIGRE && !ia_tigre) || (plateau.joueur_courant == CHEVRE && !ia_chevre)) {
 			// C'est au tour d'un joueur humain
 
@@ -77,7 +76,6 @@ int main () {
 				plateau = plateauAvant;
 			}
 			else if (retour == QUITTER) {
-				sleep(1);
 				endwin();
 				return 0;
 			}
@@ -87,16 +85,16 @@ int main () {
 				clear();
 			}
 			else {
-				plateauAvant = plateau;
 				if (plateau.joueur_courant == CHEVRE && plateau.phase == PLACEMENT && retour == VIDE) {
-					chevre_placement(x_grille, y_grille, &gagnant);
+					chevre_placement(x_grille, y_grille, &gagnant, &plateauAvant);
 				}
 				else if (plateau.joueur_courant == CHEVRE && plateau.phase == DEPLACEMENT && retour == CHEVRE) {
-					chevre_deplacement(x_grille, y_grille, &gagnant);
+					chevre_deplacement(x_grille, y_grille, &gagnant, &plateauAvant);
 				}
 				else if (plateau.joueur_courant == TIGRE && retour == TIGRE) { // Tour des tigres
-					tigre_deplacement(x_grille, y_grille, &gagnant);
+					tigre_deplacement(x_grille, y_grille, &gagnant, &plateauAvant);
 				}
+				affichage_vider_info();
 			}
 		}
 		else { // c'est au tour d'un joueur IA
@@ -138,8 +136,8 @@ void main_initialisation () {
 	* Place les tigres dans les angles et met à VIDE
 	* les autres cases */
 	int i,j;
-	for (i=0; i < NB_CASES_X; i++) {
-		for (j=0; j < NB_CASES_Y; j++) {
+	for (i=0; i < 5; i++) {
+		for (j=0; j < 5; j++) {
 			plateau.grille[i][j] = VIDE;
 		}
 	}
