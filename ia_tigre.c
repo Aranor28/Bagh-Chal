@@ -6,10 +6,10 @@
 #include "main.h"
 #include "affichage.h"
 
-void ia_tigre_deplacement(){
+void ia_tigre_deplacement () {
 	int i, j, x_final, y_final;
-	for (i=0; i< 5 ;i++) {
-		for (j=0 ; j < 5 ; j++) {
+	for (i=0; i< 5; i++) {
+		for (j=0; j < 5; j++) {
 			if (plateau.grille[i][j] == TIGRE && ia_tigre_mange_chevre(i, j, &x_final, &y_final)) {
 				plateau.grille[i][j] = VIDE;
 				plateau.grille[(i+x_final)/2][(j+y_final)/2] = VIDE; // la chèvre est mangée
@@ -21,14 +21,21 @@ void ia_tigre_deplacement(){
 		}
 	}
 	// Aucune chèvre n'est mangeable
-	while (true) {
-		for (i=0; i< 5 ;i++) {
-			for (j=0 ; j < 5 ; j++) {
-				if (plateau.grille[i][j] == TIGRE && ia_tigre_deplacment_valide(i,j))
-					return;
-			}
+	for (i=0; i< 5; i++) {
+		for (j=0; j < 5; j++) {
+			if (plateau.grille[i][j] == TIGRE && ia_tigre_deplacment_valide(i,j))
+				return;
 		}
 	}
+	// tests amélioration
+	// int x1, y1, x2, y2;
+	// for (i=0; i< 5; i++) {
+	// 	for (j=0; j < 5; j++) {
+	// 		if (plateau.grille[i][j] == CHEVRE && partie_chevre_vulnerable(i, j, &x1, &y1, &x2, &y2) {
+				
+	// 		}
+	// 	}
+	// }
 }
 
 bool ia_tigre_deplacment_valide (int x, int y){

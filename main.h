@@ -14,7 +14,9 @@
 #define DEPLACEMENT 2
 
 /* Nom du fichier dans lequel sera écrit la sauvegarde */
-#define NOM_FICHIER_SAUVEGARDE "sauvegarde.txt"
+#define NOM_FICHIER_SAUVEGARDE1 "sauvegarde1.txt"
+#define NOM_FICHIER_SAUVEGARDE2 "sauvegarde2.txt"
+#define NOM_FICHIER_SAUVEGARDE3 "sauvegarde3.txt"
 
 /* Définition des cases */
 #define VIDE 0
@@ -34,6 +36,11 @@
 #define IA_TIGRE 2
 #define IA_CHEVRE 3
 #define AIDE 9
+
+/* Emplacements de sauvegarde */
+#define FICH1 10
+#define FICH2 11
+#define FICH3 12
 
 /* DEFINITION DU PLATEAU */
 typedef struct et_plateauBC {

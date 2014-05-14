@@ -13,19 +13,19 @@
 /* 
  * Position et contenu des boutons utilitaires
  */
-#define BOUTTON_SAUVEGARDER " SAUVEGARDER "
+#define BOUTON_SAUVEGARDER " SAUVEGARDER "
 #define X_SAUVEGARDER 15
 #define Y_SAUVEGARDER 15
 
-#define BOUTTON_CHARGER "   CHARGER   "
+#define BOUTON_CHARGER "   CHARGER   "
 #define X_CHARGER 15
 #define Y_CHARGER 17
 
-#define BOUTTON_ANNULER "   ANNULER   "
+#define BOUTON_ANNULER "   ANNULER   "
 #define X_ANNULER 15
 #define Y_ANNULER 19
 
-#define BOUTTON_QUITTER "   QUITTER   "
+#define BOUTON_QUITTER "   QUITTER   "
 #define X_QUITTER 15
 #define Y_QUITTER 21
 
@@ -42,15 +42,15 @@
 #define X_BIENVENUE 20
 #define Y_BIENVENUE 8
 
-#define BOUTTON_JcJ " Joueur contre Joueur "
+#define BOUTON_JcJ " Joueur contre Joueur "
 #define X_MENU_JcJ 35
 #define Y_MENU_JcJ 10
 
-#define BOUTTON_JcIA_CHEVRE " Jouer Tigre contre Ordinateur Chèvre "
+#define BOUTON_JcIA_CHEVRE " Jouer Tigre contre Ordinateur Chèvre "
 #define X_MENU_JcIA_CHEVRE 35
 #define Y_MENU_JcIA_CHEVRE 14
 
-#define BOUTTON_JcIA_TIGRE " Jouer Chevre contre Ordinateur Tigre "
+#define BOUTON_JcIA_TIGRE " Jouer Chevre contre Ordinateur Tigre "
 #define X_MENU_JcIA_TIGRE 35
 #define Y_MENU_JcIA_TIGRE 12
 
@@ -58,6 +58,20 @@
 #define X_MENU_AIDE 100
 #define Y_MENU_AIDE 1
 
+/* 
+ * Position et contenu des boutons de sauvegarde 
+ */
+#define BOUTON_EMPL1 "Fichier 1"
+#define X_EMPL1 35
+#define Y_EMPL1 13
+
+#define BOUTON_EMPL2 "Fichier 2"
+#define X_EMPL2 35
+#define Y_EMPL2 15
+
+#define BOUTON_EMPL3 "Fichier 3"
+#define X_EMPL3 35
+#define Y_EMPL3 17
 
 /*
  * Paires de couleurs 
@@ -81,6 +95,7 @@
 #define COULEURS_BIENVENUE 17
 #define COULEURS_AIDE 18
 #define COULEURS_INFO 19
+#define COULEURS_EMPL 20
 
 
 /*
@@ -158,5 +173,11 @@ void affichage_menu ();
  * Affiche l'aide à tout moment du jeu si l'utilisateur clique sur le bouton
  */
 void affichage_aide ();
+
+
+
+void affichage_emplacements_sauvegarde();
+
+void affichage_emplacements_sauvegarde_vider ();
 
 #endif

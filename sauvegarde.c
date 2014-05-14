@@ -2,6 +2,8 @@
 
 #include "sauvegarde.h"
 #include "main.h"
+#include "affichage.h"
+#include "entree_souris.h"
 
 /* AFFICHE DANS LE FICHIER DE SAUVEGARDE :
  * LE PLATEAU LIGNE PAR LIGNE
@@ -10,11 +12,39 @@
  * LE TOUR DU JOUEUR SUIVANT
  */
 void sauvegarder_partie () {
+	int retour = VIDE;
+	FILE * fich;
+	do {
+		affichage_emplacements_sauvegarde();
+		retour = ES_recuperer_sauvegarde ();
+	} while (retour == VIDE);
+
+	switch (retour) {
+		case FICH1:
+			fich = fopen(NOM_FICHIER_SAUVEGARDE1, "w");
+			break;
+
+		case FICH2:
+			fich = fopen(NOM_FICHIER_SAUVEGARDE2, "w");
+			break;
+
+		case FICH3:
+			fich = fopen(NOM_FICHIER_SAUVEGARDE3, "w");
+			break;
+
+		case SAUVEGARDER:
+			return;
+			break;
+
+		case ANNULER:
+			return;
+			break;
+	}
+	affichage_emplacements_sauvegarde_vider ();
 	int i,j;
 
-	FILE * fich = fopen(NOM_FICHIER_SAUVEGARDE, "w");
 	if (fich == NULL){
-		fprintf(stderr, "Erreur lors de la sauvegarde du plateau\n");
+		affichage_ligne_info("Erreur lors de la sauvegarde du plateau\n");
 		return;
 	}
 	fprintf(fich, "\\board\n");
@@ -38,4 +68,5 @@ void sauvegarder_partie () {
 	fprintf(fich,"\\phase %d\n", plateau.phase);
 	fprintf(fich,"\\captured %d\n", plateau.nb_chevres_mangees);
 	fclose(fich);
+	affichage_ligne_info("Sauvegarde effectuée");
 }

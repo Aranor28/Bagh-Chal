@@ -5,6 +5,6 @@
 /*
  * Charge une partie sauvegardée au préalable dans un fichier selon un format spécial 
  */
-int charger_partie (char * nomFich);
+int charger_partie ();
 
 #endif

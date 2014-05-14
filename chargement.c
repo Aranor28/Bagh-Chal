@@ -4,13 +4,41 @@
 #include "chargement.h"
 #include "main.h"
 #include "affichage.h"
+#include "entree_souris.h"
 
-int charger_partie (char * nomFich) {
+int charger_partie () {
 	int i, j;
 	char temp;
 	char chaine[15];
+	int retour = VIDE;
+	FILE * fich;
+	do {
+		affichage_emplacements_sauvegarde();
+		retour = ES_recuperer_sauvegarde ();
+	} while (retour == VIDE);
 
-	FILE * fich = fopen(nomFich, "r");
+	switch (retour) {
+		case FICH1:
+			fich = fopen(NOM_FICHIER_SAUVEGARDE1, "r");
+			break;
+
+		case FICH2:
+			fich = fopen(NOM_FICHIER_SAUVEGARDE2, "r");
+			break;
+
+		case FICH3:
+			fich = fopen(NOM_FICHIER_SAUVEGARDE3, "r");
+			break;
+
+		case CHARGER:
+			return (1);
+			break;
+
+		case ANNULER:
+			return (1);
+			break;
+	}
+	affichage_emplacements_sauvegarde_vider ();
 	if (fich == NULL){
 		affichage_ligne_info("Erreur lors de l'ouverture du fichier");
 		return (0);

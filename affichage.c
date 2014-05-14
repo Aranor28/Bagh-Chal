@@ -34,11 +34,13 @@ void affichage_init_color_pairs () {
 	init_pair(COULEURS_BOUTON_JcIA_TIGRE, COLOR_WHITE, COLOR_GREEN);
 
 	/* Paire de couleur de l'aide */
-	init_pair(COULEURS_AIDE, COLOR_WHITE,COLOR_BLACK);
+	init_pair(COULEURS_AIDE, COLOR_WHITE, COLOR_BLACK);
 
 	/* Paire de couleur des lignes d'informations */ 
-	init_pair(COULEURS_INFO, COLOR_CYAN,COLOR_BLACK);
+	init_pair(COULEURS_INFO, COLOR_CYAN, COLOR_BLACK);
 
+	/* Paire de couleur des boutons d'emplacement de sauvegarde */
+	init_pair(COULEURS_EMPL, COLOR_CYAN, COLOR_BLACK);
 }
 
 void affichage () {
@@ -103,22 +105,22 @@ void affichage_pion() {
 
 void affichage_bouttons() {
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_SAUVEGARDE));
-	mvprintw(Y_SAUVEGARDER, X_SAUVEGARDER,"[" BOUTTON_SAUVEGARDER "]");
+	mvprintw(Y_SAUVEGARDER, X_SAUVEGARDER,"[" BOUTON_SAUVEGARDER "]");
 	mvprintw(Y_SAUVEGARDER + 1, X_SAUVEGARDER , "               ");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_SAUVEGARDE));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_CHARGER));
-	mvprintw(Y_CHARGER, X_CHARGER,"[" BOUTTON_CHARGER "]");
+	mvprintw(Y_CHARGER, X_CHARGER,"[" BOUTON_CHARGER "]");
 	mvprintw(Y_CHARGER + 1, X_CHARGER , "               ");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_CHARGER));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_ANNULER));
-	mvprintw(Y_ANNULER, X_ANNULER,"[" BOUTTON_ANNULER "]");
+	mvprintw(Y_ANNULER, X_ANNULER,"[" BOUTON_ANNULER "]");
 	mvprintw(Y_ANNULER + 1, X_ANNULER , "               ");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_ANNULER));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_QUITTER));
-	mvprintw(Y_QUITTER, X_QUITTER,"[" BOUTTON_QUITTER "]");
+	mvprintw(Y_QUITTER, X_QUITTER,"[" BOUTON_QUITTER "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_QUITTER));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
@@ -194,15 +196,15 @@ void affichage_menu (){
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BIENVENUE));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
-	mvprintw(Y_MENU_JcJ, X_MENU_JcJ,"[" BOUTTON_JcJ "]");
+	mvprintw(Y_MENU_JcJ, X_MENU_JcJ,"[" BOUTON_JcJ "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcJ));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_TIGRE));
-	mvprintw(Y_MENU_JcIA_TIGRE, X_MENU_JcIA_TIGRE,"[" BOUTTON_JcIA_TIGRE"]");
+	mvprintw(Y_MENU_JcIA_TIGRE, X_MENU_JcIA_TIGRE,"[" BOUTON_JcIA_TIGRE"]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_TIGRE));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
-	mvprintw(Y_MENU_JcIA_CHEVRE, X_MENU_JcIA_CHEVRE,"[" BOUTTON_JcIA_CHEVRE "]");
+	mvprintw(Y_MENU_JcIA_CHEVRE, X_MENU_JcIA_CHEVRE,"[" BOUTON_JcIA_CHEVRE "]");
 	attroff(A_BOLD | COLOR_PAIR(COULEURS_BOUTON_JcIA_CHEVRE));
 
 	attron(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
@@ -222,4 +224,18 @@ void affichage_aide () {
 void affichage_vider_info () {
 	mvprintw(Y_LIGNE_INFO, X_LIGNE_INFO, "										");
 	refresh();
+}
+
+void affichage_emplacements_sauvegarde(){
+	attron(A_BOLD | COLOR_PAIR(COULEURS_EMPL));
+	mvprintw(Y_EMPL1, X_EMPL1, BOUTON_EMPL1);
+	mvprintw(Y_EMPL2, X_EMPL2, BOUTON_EMPL2);
+	mvprintw(Y_EMPL3, X_EMPL3, BOUTON_EMPL3);
+	attroff(A_BOLD | COLOR_PAIR(COULEURS_AIDE));
+}
+
+void affichage_emplacements_sauvegarde_vider () {
+	mvprintw(Y_EMPL1, X_EMPL1, "         ");
+	mvprintw(Y_EMPL2, X_EMPL2, "         ");
+	mvprintw(Y_EMPL3, X_EMPL3, "         ");
 }

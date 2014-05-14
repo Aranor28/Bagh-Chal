@@ -111,3 +111,26 @@ bool partie_pion_adjacent (int x, int y, int type, int * x_pion, int * y_pion) {
 	}
 	return(false);
 }
+
+// bool partie_chevre_vulnerable (int x_chevre, int y_chevre, int * x1, int * y1, int * x2, int * y2) {
+// 	int i, j, depart_x, depart_y, fin_x, fin_y;
+// 	bool acces_diag = ((x_chevre + y) % 2 == 0);
+
+// 	depart_x = (x_chevre == 0) ? 0 : x_chevre-1;
+// 	depart_y = (y_chevre == 0) ? 0 : y_chevre-1;
+// 	fin_x = (x_chevre == 4) ? 4 : x_chevre+1;
+// 	fin_y = (y_chevre == 4) ? 4 : y_chevre+1;
+
+// 	for (*x1 = depart_x; *x1 <= fin_x; *x1++) {
+// 		for (*y1 = depart_y; *y1 <= fin_y; *y1++) {
+// 			if (plateau.grille[*x1][*y1] == VIDE) {
+// 				*x2 = 2*x_chevre - *x1;
+// 				*y2 = 2*y_chevre - *y1;
+// 				if (plateau.grille[*x2][*y2] == VIDE) {
+// 					return(true);
+// 				}
+// 			}
+// 		}
+// 	}
+// 	return(false);
+// }

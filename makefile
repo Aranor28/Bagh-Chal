@@ -42,4 +42,4 @@ clean:
 	rm -rf *.o
 
 maxclean:
-	rm -rf *.o $(EXEC) sauvegarde.txt
+	rm -rf *.o $(EXEC) sauvegarde*.txt

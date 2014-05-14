@@ -64,11 +64,10 @@ int main () {
 			affichage_vider_info();
 			if (retour == SAUVEGARDER) {
 				sauvegarder_partie();
-				affichage_ligne_info("Sauvegarde effectuée");
 			}
 			else if (retour == CHARGER) {
 				plateauAvant = plateau; // On peut ainsi revenir en arrière si le chargement était une erreur
-				charger_partie(NOM_FICHIER_SAUVEGARDE);
+				charger_partie();
 			}
 			else if (retour == ANNULER) {
 				/* On rétablit le plateau à l'état qu'il était au tour précédent (de joueur humain) */

@@ -25,5 +25,6 @@ void ES_recuperer_entree (int * x_win, int * y_win);
  * Retourne vrai si le type de case est situé dans le plateau de jeu
  */
 bool ES_dans_plateau (int type);
+int ES_recuperer_sauvegarde ();
 
 #endif
